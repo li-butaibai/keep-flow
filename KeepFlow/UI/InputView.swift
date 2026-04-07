@@ -8,9 +8,12 @@ struct InputView: View {
 
     var body: some View {
         HStack(spacing: 8) {
-            Image(systemName: "square.and.pencil")
-                .foregroundColor(.gray)
-                .font(.system(size: 14, weight: .medium))
+            if let appIcon = NSImage(named: "AppIcon") {
+                Image(nsImage: appIcon)
+                    .resizable()
+                    .interpolation(.high)
+                    .frame(width: 18, height: 18)
+            }
 
             TextField(localization.localized("input.placeholder"), text: $viewModel.inputText)
                 .textFieldStyle(.plain)

@@ -270,7 +270,7 @@ class AppSettings {
     var taskListLimit: Int {
         get {
             let value = UserDefaults.standard.integer(forKey: taskLimitKey)
-            return value > 0 ? value : 5
+            return value > 0 ? value : Constants.Layout.taskListLimit
         }
         set {
             UserDefaults.standard.set(newValue, forKey: taskLimitKey)

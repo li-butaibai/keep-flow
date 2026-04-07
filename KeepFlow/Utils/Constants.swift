@@ -15,13 +15,13 @@ enum Constants {
     }
 
     enum Layout {
-        static let taskListLimit: Int = 5
+        static let taskListLimit: Int = 10
         static let taskListPageSize: Int = 5
         static let inputFieldHeight: CGFloat = 44
         static let contentPadding: CGFloat = 12
         static let contentSpacing: CGFloat = 10
-        static let taskListMaxHeight: CGFloat = 220
-        static let panelMaxHeight: CGFloat = 360
+        static let taskListMaxHeight: CGFloat = 440
+        static let panelMaxHeight: CGFloat = 580
     }
 
     enum Database {

@@ -9,42 +9,48 @@ enum MenuBarIcon {
         strokeColor.setStroke()
         strokeColor.setFill()
 
-        let inset = size * 0.16
+        let inset = size * 0.12
         let rect = NSRect(x: inset, y: inset, width: size - inset * 2, height: size - inset * 2)
 
         let path = NSBezierPath()
-        path.lineWidth = max(1.7, size * 0.11)
+        path.lineWidth = max(1.8, size * 0.12)
         path.lineCapStyle = .round
         path.lineJoinStyle = .round
 
-        path.move(to: NSPoint(x: rect.minX + rect.width * 0.78, y: rect.maxY))
+        path.move(to: NSPoint(x: rect.minX + rect.width * 0.82, y: rect.maxY - rect.height * 0.02))
         path.curve(
-            to: NSPoint(x: rect.minX + rect.width * 0.34, y: rect.maxY - rect.height * 0.20),
-            controlPoint1: NSPoint(x: rect.minX + rect.width * 0.62, y: rect.maxY),
-            controlPoint2: NSPoint(x: rect.minX + rect.width * 0.42, y: rect.maxY - rect.height * 0.01)
+            to: NSPoint(x: rect.minX + rect.width * 0.26, y: rect.minY + rect.height * 0.56),
+            controlPoint1: NSPoint(x: rect.minX + rect.width * 0.63, y: rect.maxY + rect.height * 0.04),
+            controlPoint2: NSPoint(x: rect.minX + rect.width * 0.33, y: rect.minY + rect.height * 0.78)
         )
         path.curve(
-            to: NSPoint(x: rect.minX + rect.width * 0.28, y: rect.minY + rect.height * 0.50),
-            controlPoint1: NSPoint(x: rect.minX + rect.width * 0.28, y: rect.maxY - rect.height * 0.34),
-            controlPoint2: NSPoint(x: rect.minX + rect.width * 0.22, y: rect.minY + rect.height * 0.63)
+            to: NSPoint(x: rect.minX + rect.width * 0.55, y: rect.minY + rect.height * 0.43),
+            controlPoint1: NSPoint(x: rect.minX + rect.width * 0.33, y: rect.minY + rect.height * 0.34),
+            controlPoint2: NSPoint(x: rect.minX + rect.width * 0.48, y: rect.minY + rect.height * 0.43)
         )
         path.curve(
-            to: NSPoint(x: rect.minX + rect.width * 0.66, y: rect.minY + rect.height * 0.39),
-            controlPoint1: NSPoint(x: rect.minX + rect.width * 0.37, y: rect.minY + rect.height * 0.31),
-            controlPoint2: NSPoint(x: rect.minX + rect.width * 0.56, y: rect.minY + rect.height * 0.25)
-        )
-        path.curve(
-            to: NSPoint(x: rect.minX + rect.width * 0.57, y: rect.minY),
-            controlPoint1: NSPoint(x: rect.minX + rect.width * 0.78, y: rect.minY + rect.height * 0.53),
-            controlPoint2: NSPoint(x: rect.minX + rect.width * 0.72, y: rect.minY + rect.height * 0.08)
+            to: NSPoint(x: rect.minX + rect.width * 0.40, y: rect.minY + rect.height * 0.12),
+            controlPoint1: NSPoint(x: rect.minX + rect.width * 0.66, y: rect.minY + rect.height * 0.43),
+            controlPoint2: NSPoint(x: rect.minX + rect.width * 0.54, y: rect.minY + rect.height * 0.17)
         )
 
         path.stroke()
 
-        let dotSize = max(2.6, size * 0.18)
+        let tail = NSBezierPath()
+        tail.lineWidth = path.lineWidth
+        tail.lineCapStyle = .round
+        tail.move(to: NSPoint(x: rect.minX + rect.width * 0.39, y: rect.minY + rect.height * 0.12))
+        tail.curve(
+            to: NSPoint(x: rect.minX + rect.width * 0.14, y: rect.minY + rect.height * 0.04),
+            controlPoint1: NSPoint(x: rect.minX + rect.width * 0.31, y: rect.minY + rect.height * 0.07),
+            controlPoint2: NSPoint(x: rect.minX + rect.width * 0.22, y: rect.minY + rect.height * 0.02)
+        )
+        tail.stroke()
+
+        let dotSize = max(2.8, size * 0.19)
         let dotRect = NSRect(
-            x: rect.maxX - dotSize * 1.2,
-            y: rect.minY + rect.height * 0.10,
+            x: rect.minX + rect.width * 0.64,
+            y: rect.minY + rect.height * 0.09,
             width: dotSize,
             height: dotSize
         )

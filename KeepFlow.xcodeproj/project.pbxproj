@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		010108F103A73764E17A0C91 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5033170B3A3B350CA02B70F /* MainViewModel.swift */; };
 		1803DE6958BFCF3C094607B0 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E64D9BA5558DB3ACCF08773 /* main.swift */; };
-		19BA7EABBB971651B592E93E /* AppIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 773BE37B4B1058788048C925 /* AppIcon.icns */; };
 		19F820FF880A080EA3AEB33E /* TaskRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59BC7092F124CA8FE74A9399 /* TaskRepository.swift */; };
 		1DA5AE18CD5487B04782AB59 /* Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960EEAC2A83148DA603CDF3F /* Localization.swift */; };
 		39B19B71AE9467688E0E884F /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F73143B157D423E1D74B59C /* DatabaseManager.swift */; };
@@ -44,7 +43,6 @@
 		602D8CCFA403AAB232613C22 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		6093B42E16DD8AD7BEA7BE13 /* TaskRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRow.swift; sourceTree = "<group>"; };
 		6C0AD7257CDC987767B5602B /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		773BE37B4B1058788048C925 /* AppIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = AppIcon.icns; sourceTree = "<group>"; };
 		78384148B1C19707EB20AB07 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7ED6C8425CBE011CCB1BB508 /* TaskManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskManager.swift; sourceTree = "<group>"; };
 		8F73143B157D423E1D74B59C /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
@@ -139,7 +137,6 @@
 		7F929CC4C0916D0F4CB06F01 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				773BE37B4B1058788048C925 /* AppIcon.icns */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -268,7 +265,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				19BA7EABBB971651B592E93E /* AppIcon.icns in Resources */,
 				EDBF90836EC196FF41CDC126 /* Assets.xcassets in Resources */,
 				56D5F4F9A6C6B8D79F33EAFB /* Localizable.strings in Resources */,
 			);
