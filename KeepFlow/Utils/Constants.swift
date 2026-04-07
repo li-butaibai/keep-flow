@@ -5,6 +5,7 @@ enum Constants {
         static let width: CGFloat = 680
         static let height: CGFloat = 500
         static let cornerRadius: CGFloat = 14
+        static let topOffset: CGFloat = 96
     }
 
     enum Animation {
@@ -15,7 +16,12 @@ enum Constants {
 
     enum Layout {
         static let taskListLimit: Int = 5
+        static let taskListPageSize: Int = 5
         static let inputFieldHeight: CGFloat = 44
+        static let contentPadding: CGFloat = 12
+        static let contentSpacing: CGFloat = 10
+        static let taskListMaxHeight: CGFloat = 220
+        static let panelMaxHeight: CGFloat = 360
     }
 
     enum Database {

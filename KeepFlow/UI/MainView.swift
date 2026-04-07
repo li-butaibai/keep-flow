@@ -3,29 +3,46 @@ import AppKit
 
 struct MainView: View {
     @ObservedObject var viewModel: MainViewModel
-
-    private var dynamicHeight: CGFloat {
-        let inputHeight: CGFloat = 44
-        let taskRowHeight: CGFloat = 36
-        let maxTasks = AppSettings.shared.taskListLimit
-        let taskCount = min(viewModel.tasks.count, maxTasks)
-        let taskListHeight = taskCount > 0 ? CGFloat(taskCount) * taskRowHeight : 0
-        let emptyHeight: CGFloat = taskCount == 0 ? 40 : 0
-
-        return inputHeight + taskListHeight + emptyHeight
-    }
+    @ObservedObject private var localization = LocalizationManager.shared
 
     var body: some View {
-        VStack(spacing: 0) {
-            InputView(viewModel: viewModel)
-                .padding(.top, 0)
+        ZStack {
+            RoundedRectangle(cornerRadius: Constants.Window.cornerRadius, style: .continuous)
+                .fill(Color(NSColor.windowBackgroundColor).opacity(0.96))
 
-            if viewModel.tasks.count > 0 {
-                TaskListView(viewModel: viewModel)
+            VStack(spacing: Constants.Layout.contentSpacing) {
+                InputView(viewModel: viewModel)
+                    .frame(height: Constants.Layout.inputFieldHeight)
+
+                if viewModel.tasks.count > 0 {
+                    Divider()
+                        .background(Color.gray.opacity(0.35))
+
+                    HStack {
+                        Text(localization.localized("app.slogan"))
+                            .font(.system(size: 12, weight: .medium))
+                            .foregroundColor(.gray.opacity(0.85))
+                            .tracking(0.2)
+
+                        Spacer()
+                    }
+                }
+
+                taskListContainer
+                    .frame(maxHeight: Constants.Layout.taskListMaxHeight)
             }
+            .padding(Constants.Layout.contentPadding)
         }
-        .frame(width: Constants.Window.width, height: dynamicHeight)
-        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-        .background(Color(NSColor.windowBackgroundColor).opacity(0.95))
+        .frame(width: Constants.Window.width)
+        .clipShape(RoundedRectangle(cornerRadius: Constants.Window.cornerRadius, style: .continuous))
+    }
+
+    @ViewBuilder
+    private var taskListContainer: some View {
+        if viewModel.tasks.count > 0 {
+            TaskListView(viewModel: viewModel)
+        } else {
+            EmptyView()
+        }
     }
 }

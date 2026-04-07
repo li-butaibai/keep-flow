@@ -2,23 +2,46 @@ import SwiftUI
 
 struct TaskListView: View {
     @ObservedObject var viewModel: MainViewModel
+    @ObservedObject private var localization = LocalizationManager.shared
 
     var body: some View {
-        VStack(spacing: 0) {
-            ForEach(Array(viewModel.tasks.prefix(AppSettings.shared.taskListLimit).enumerated()), id: \.element.id) { index, task in
-                TaskRow(task: task, isSelected: viewModel.interactionMode == .selection && index == viewModel.selectedIndex)
-                    .onTapGesture {
-                        viewModel.selectedIndex = index
-                        viewModel.interactionMode = .selection
-                    }
+        ScrollView {
+            VStack(spacing: 0) {
+                ForEach(Array(viewModel.tasks.enumerated()), id: \.element.id) { index, task in
+                    TaskRow(
+                        task: task,
+                        isSelected: viewModel.interactionMode == .selection && index == viewModel.selectedIndex,
+                        onStatusTap: {
+                            viewModel.completeTask(at: index)
+                        }
+                    )
+                        .onTapGesture {
+                            viewModel.selectedIndex = index
+                            viewModel.interactionMode = .selection
+                        }
 
-                if index < min(viewModel.tasks.count, AppSettings.shared.taskListLimit) - 1 {
-                    Divider()
-                        .background(Color.white.opacity(0.1))
+                    if index < viewModel.tasks.count - 1 {
+                        Divider()
+                            .background(Color.gray.opacity(0.12))
+                    }
+                }
+
+                if viewModel.hasMoreTasks {
+                    Button(action: {
+                        viewModel.loadMoreTasks()
+                    }) {
+                        Text(localization.localized("tasks.load_more"))
+                            .font(.system(size: 12, weight: .medium))
+                            .foregroundColor(.secondary)
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 10)
+                    }
+                    .buttonStyle(.plain)
                 }
             }
         }
-        .padding(.horizontal, 12)
-        .padding(.vertical, 6)
+        .scrollIndicators(.visible)
+        .padding(.horizontal, 4)
+        .padding(.bottom, 4)
     }
 }

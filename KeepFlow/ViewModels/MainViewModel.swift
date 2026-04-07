@@ -6,6 +6,8 @@ class MainViewModel: ObservableObject {
     @Published var tasks: [Task] = []
     @Published var selectedIndex: Int = 0
     @Published var shouldResetFocus: Bool = false
+    @Published var visibleTaskLimit: Int = AppSettings.shared.taskListLimit
+    @Published var totalVisibleTaskCount: Int = 0
 
     enum InteractionMode {
         case input
@@ -37,14 +39,42 @@ class MainViewModel: ObservableObject {
 
         do {
             try TaskManager.shared.completeTask(id: task.id)
-            WindowManager.shared.close()
+            fetchTasks()
         } catch {
             print("Failed to complete task: \(error)")
         }
     }
 
     func fetchTasks() {
-        tasks = TaskManager.shared.fetchTasks(limit: AppSettings.shared.taskListLimit)
+        totalVisibleTaskCount = TaskManager.shared.visibleTaskCount()
+        tasks = TaskManager.shared.fetchTasks(limit: visibleTaskLimit)
+
+        if tasks.isEmpty {
+            interactionMode = .input
+            selectedIndex = 0
+        } else {
+            selectedIndex = min(selectedIndex, tasks.count - 1)
+        }
+
+        DispatchQueue.main.async {
+            if WindowManager.shared.isVisible {
+                WindowManager.shared.resizePanelToContent()
+            }
+        }
+    }
+
+    func resetTaskPagination() {
+        visibleTaskLimit = AppSettings.shared.taskListLimit
+    }
+
+    func loadMoreTasks() {
+        guard hasMoreTasks else { return }
+        visibleTaskLimit += Constants.Layout.taskListPageSize
+        fetchTasks()
+    }
+
+    var hasMoreTasks: Bool {
+        tasks.count < totalVisibleTaskCount
     }
 
     func selectNext() {

@@ -3,25 +3,32 @@ import SwiftUI
 struct TaskRow: View {
     let task: Task
     var isSelected: Bool = false
+    var onStatusTap: (() -> Void)? = nil
 
     @State private var appeared = false
+    @ObservedObject private var localization = LocalizationManager.shared
 
     var body: some View {
         HStack(spacing: 12) {
-            // Checkbox
-            ZStack {
-                Circle()
-                    .fill(task.status == .done ? Color.clear : Color.gray.opacity(0.2))
-                    .frame(width: 14, height: 14)
-                if task.status == .done {
+            Button(action: {
+                onStatusTap?()
+            }) {
+                ZStack {
                     Circle()
-                        .fill(Color.green.opacity(0.8))
+                        .fill(task.status == .done ? Color.clear : Color.gray.opacity(0.2))
                         .frame(width: 14, height: 14)
-                    Image(systemName: "checkmark")
-                        .font(.system(size: 7, weight: .bold))
-                        .foregroundColor(.white)
+                    if task.status == .done {
+                        Circle()
+                            .fill(Color.green.opacity(0.8))
+                            .frame(width: 14, height: 14)
+                        Image(systemName: "checkmark")
+                            .font(.system(size: 7, weight: .bold))
+                            .foregroundColor(.white)
+                    }
                 }
+                .frame(width: 28, height: 28)
             }
+            .buttonStyle(.plain)
 
             // Content
             Text(task.content)
@@ -67,7 +74,7 @@ struct TaskRow: View {
         if calendar.isDateInToday(task.createdAt) {
             formatter.dateFormat = "HH:mm"
         } else if calendar.isDateInYesterday(task.createdAt) {
-            return "昨天"
+            return localization.localized("date.yesterday")
         } else {
             formatter.dateFormat = "MM/dd"
         }

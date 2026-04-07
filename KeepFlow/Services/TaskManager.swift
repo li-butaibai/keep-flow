@@ -43,10 +43,19 @@ final class TaskManager {
 
     func fetchTasks(limit: Int = 5) -> [Task] {
         do {
-            return try repository.findTodoTasks(limit: limit)
+            return try repository.findVisibleTasks(limit: limit, now: Date())
         } catch {
             print("Failed to fetch tasks: \(error)")
             return []
+        }
+    }
+
+    func visibleTaskCount() -> Int {
+        do {
+            return try repository.countVisibleTasks(now: Date())
+        } catch {
+            print("Failed to count visible tasks: \(error)")
+            return 0
         }
     }
 }

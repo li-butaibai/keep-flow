@@ -14,10 +14,10 @@ struct ShortcutConfiguration: Codable, Equatable {
 
     var displayString: String {
         var parts: [String] = []
-        if modifiers & UInt32(controlKey) != 0 { parts.append("^") }
-        if modifiers & UInt32(optionKey) != 0 { parts.append("Option") }
-        if modifiers & UInt32(shiftKey) != 0 { parts.append("Shift") }
-        if modifiers & UInt32(cmdKey) != 0 { parts.append("Cmd") }
+        if modifiers & UInt32(controlKey) != 0 { parts.append(L10n.tr("shortcut.modifier.control")) }
+        if modifiers & UInt32(optionKey) != 0 { parts.append(L10n.tr("shortcut.modifier.option")) }
+        if modifiers & UInt32(shiftKey) != 0 { parts.append(L10n.tr("shortcut.modifier.shift")) }
+        if modifiers & UInt32(cmdKey) != 0 { parts.append(L10n.tr("shortcut.modifier.command")) }
 
         let keyString = keyCodeToString(keyCode)
         parts.append(keyString)
@@ -27,16 +27,16 @@ struct ShortcutConfiguration: Codable, Equatable {
 
     private func keyCodeToString(_ keyCode: UInt32) -> String {
         switch Int(keyCode) {
-        case 49: return "Space"
-        case 36: return "Return"
-        case 48: return "Tab"
-        case 51: return "Delete"
-        case 53: return "Escape"
-        case 123: return "Left"
-        case 124: return "Right"
-        case 125: return "Down"
-        case 126: return "Up"
-        default: return "Key\(keyCode)"
+        case 49: return L10n.tr("shortcut.key.space")
+        case 36: return L10n.tr("shortcut.key.return")
+        case 48: return L10n.tr("shortcut.key.tab")
+        case 51: return L10n.tr("shortcut.key.delete")
+        case 53: return L10n.tr("shortcut.key.escape")
+        case 123: return L10n.tr("shortcut.key.left")
+        case 124: return L10n.tr("shortcut.key.right")
+        case 125: return L10n.tr("shortcut.key.down")
+        case 126: return L10n.tr("shortcut.key.up")
+        default: return "\(L10n.tr("shortcut.key.prefix"))\(keyCode)"
         }
     }
 }

@@ -6,6 +6,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     private var statusItem: NSStatusItem?
 
     func applicationDidFinishLaunching(_ notification: Notification) {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handleLanguageDidChange),
+            name: .languageDidChange,
+            object: nil
+        )
+
         // Setup menu bar icon
         setupStatusBar()
 
@@ -27,7 +34,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
 
         if let button = statusItem?.button {
-            button.image = NSImage(systemSymbolName: "lightbulb.fill", accessibilityDescription: "KeepFlow")
+            button.image = MenuBarIcon.makeImage()
             button.action = #selector(statusBarButtonClicked(_:))
             button.target = self
             button.sendAction(on: [.leftMouseUp, .rightMouseUp])
@@ -48,14 +55,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     private func showMenu() {
         let menu = NSMenu()
 
-        menu.addItem(NSMenuItem(title: "打开 KeepFlow", action: #selector(openKeepFlow), keyEquivalent: ""))
+        menu.addItem(NSMenuItem(title: L10n.tr("menu.open_keepflow"), action: #selector(openKeepFlow), keyEquivalent: ""))
         menu.addItem(NSMenuItem.separator())
 
-        let settingsItem = NSMenuItem(title: "设置...", action: #selector(openSettings), keyEquivalent: ",")
+        let settingsItem = NSMenuItem(title: L10n.tr("menu.settings"), action: #selector(openSettings), keyEquivalent: ",")
         menu.addItem(settingsItem)
 
         menu.addItem(NSMenuItem.separator())
-        menu.addItem(NSMenuItem(title: "退出", action: #selector(quitApp), keyEquivalent: "q"))
+        menu.addItem(NSMenuItem(title: L10n.tr("menu.quit"), action: #selector(quitApp), keyEquivalent: "q"))
 
         statusItem?.menu = menu
         statusItem?.button?.performClick(nil)
@@ -76,8 +83,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         NSApp.terminate(nil)
     }
 
+    @objc private func handleLanguageDidChange() {
+        statusItem?.button?.toolTip = L10n.tr("app.name")
+    }
+
     func applicationWillTerminate(_ notification: Notification) {
         ShortcutManager.shared.unregister()
+        NotificationCenter.default.removeObserver(self)
     }
 }
 
@@ -87,12 +99,12 @@ class SettingsWindow: NSWindow {
 
     init() {
         super.init(
-            contentRect: NSRect(x: 0, y: 0, width: 400, height: 200),
+            contentRect: NSRect(x: 0, y: 0, width: 420, height: 250),
             styleMask: [.titled, .closable],
             backing: .buffered,
             defer: false
         )
-        self.title = "KeepFlow 设置"
+        self.title = L10n.tr("settings.title")
         self.contentViewController = SettingsViewController()
         self.center()
         self.isReleasedWhenClosed = false
@@ -103,9 +115,10 @@ class SettingsViewController: NSViewController {
 
     private var taskLimitField: NSTextField!
     private var shortcutRecordView: ShortcutRecordView!
+    private var languagePopupButton: NSPopUpButton!
 
     override func loadView() {
-        view = NSView(frame: NSRect(x: 0, y: 0, width: 400, height: 200))
+        view = NSView(frame: NSRect(x: 0, y: 0, width: 420, height: 250))
     }
 
     override func viewDidLoad() {
@@ -115,26 +128,39 @@ class SettingsViewController: NSViewController {
 
     private func setupUI() {
         // Task limit setting
-        let taskLimitLabel = NSTextField(labelWithString: "默认显示任务数量:")
-        taskLimitLabel.frame = NSRect(x: 20, y: 150, width: 140, height: 24)
+        let taskLimitLabel = NSTextField(labelWithString: L10n.tr("settings.task_limit"))
+        taskLimitLabel.frame = NSRect(x: 20, y: 190, width: 160, height: 24)
         view.addSubview(taskLimitLabel)
 
-        taskLimitField = NSTextField(frame: NSRect(x: 170, y: 150, width: 60, height: 24))
+        taskLimitField = NSTextField(frame: NSRect(x: 190, y: 190, width: 60, height: 24))
         taskLimitField.stringValue = "\(AppSettings.shared.taskListLimit)"
         taskLimitField.alignment = .center
         view.addSubview(taskLimitField)
 
         // Shortcut setting
-        let shortcutLabel = NSTextField(labelWithString: "唤醒快捷键:")
-        shortcutLabel.frame = NSRect(x: 20, y: 110, width: 140, height: 24)
+        let shortcutLabel = NSTextField(labelWithString: L10n.tr("settings.shortcut"))
+        shortcutLabel.frame = NSRect(x: 20, y: 150, width: 160, height: 24)
         view.addSubview(shortcutLabel)
 
-        shortcutRecordView = ShortcutRecordView(frame: NSRect(x: 170, y: 110, width: 180, height: 24))
+        shortcutRecordView = ShortcutRecordView(frame: NSRect(x: 190, y: 150, width: 180, height: 24))
         view.addSubview(shortcutRecordView)
 
+        let languageLabel = NSTextField(labelWithString: L10n.tr("settings.language"))
+        languageLabel.frame = NSRect(x: 20, y: 110, width: 160, height: 24)
+        view.addSubview(languageLabel)
+
+        languagePopupButton = NSPopUpButton(frame: NSRect(x: 190, y: 110, width: 180, height: 28), pullsDown: false)
+        AppLanguage.allCases.forEach { language in
+            languagePopupButton.addItem(withTitle: LocalizationManager.shared.displayName(for: language))
+        }
+        if let selectedIndex = AppLanguage.allCases.firstIndex(of: AppSettings.shared.appLanguage) {
+            languagePopupButton.selectItem(at: selectedIndex)
+        }
+        view.addSubview(languagePopupButton)
+
         // Save button
-        let saveButton = NSButton(title: "保存", target: self, action: #selector(saveSettings))
-        saveButton.frame = NSRect(x: 150, y: 40, width: 100, height: 32)
+        let saveButton = NSButton(title: L10n.tr("common.save"), target: self, action: #selector(saveSettings))
+        saveButton.frame = NSRect(x: 160, y: 40, width: 100, height: 32)
         saveButton.bezelStyle = .rounded
         view.addSubview(saveButton)
     }
@@ -151,6 +177,11 @@ class SettingsViewController: NSViewController {
             modifiers: shortcutRecordView.modifiers
         )
 
+        if let selectedLanguage = AppLanguage.allCases[safe: languagePopupButton.indexOfSelectedItem] {
+            AppSettings.shared.appLanguage = selectedLanguage
+            LocalizationManager.shared.setLanguage(selectedLanguage)
+        }
+
         view.window?.close()
     }
 }
@@ -158,8 +189,8 @@ class SettingsViewController: NSViewController {
 // MARK: - Shortcut Record View
 
 class ShortcutRecordView: NSView {
-    var keyCode: UInt32 = 49
-    var modifiers: UInt32 = UInt32(shiftKey)
+    var keyCode: UInt32 = AppSettings.shared.shortcutKeyCode
+    var modifiers: UInt32 = AppSettings.shared.shortcutModifiers
 
     private var isRecording = false
     private var displayLabel: NSTextField!
@@ -197,7 +228,7 @@ class ShortcutRecordView: NSView {
     override func mouseDown(with event: NSEvent) {
         isRecording = true
         layer?.borderColor = NSColor.systemBlue.cgColor
-        displayLabel.stringValue = "按下快捷键..."
+        displayLabel.stringValue = L10n.tr("settings.press_shortcut")
     }
 
     override func keyDown(with event: NSEvent) {
@@ -232,6 +263,7 @@ class AppSettings {
     private let taskLimitKey = "com.keepflow.taskListLimit"
     private let shortcutKeyCodeKey = "com.keepflow.shortcutKeyCode"
     private let shortcutModifiersKey = "com.keepflow.shortcutModifiers"
+    private let appLanguageKey = "com.keepflow.appLanguage"
 
     private init() {}
 
@@ -268,10 +300,10 @@ class AppSettings {
     var shortcutDisplayString: String {
         var parts: [String] = []
         let mods = self.shortcutModifiers
-        if mods & UInt32(controlKey) != 0 { parts.append("^") }
-        if mods & UInt32(optionKey) != 0 { parts.append("Option") }
-        if mods & UInt32(shiftKey) != 0 { parts.append("Shift") }
-        if mods & UInt32(cmdKey) != 0 { parts.append("Cmd") }
+        if mods & UInt32(controlKey) != 0 { parts.append(L10n.tr("shortcut.modifier.control")) }
+        if mods & UInt32(optionKey) != 0 { parts.append(L10n.tr("shortcut.modifier.option")) }
+        if mods & UInt32(shiftKey) != 0 { parts.append(L10n.tr("shortcut.modifier.shift")) }
+        if mods & UInt32(cmdKey) != 0 { parts.append(L10n.tr("shortcut.modifier.command")) }
 
         let keyString = keyCodeToString(self.shortcutKeyCode)
         parts.append(keyString)
@@ -281,16 +313,32 @@ class AppSettings {
 
     private func keyCodeToString(_ keyCode: UInt32) -> String {
         switch Int(keyCode) {
-        case 49: return "Space"
-        case 36: return "Return"
-        case 48: return "Tab"
-        case 51: return "Delete"
-        case 53: return "Esc"
-        case 123: return "←"
-        case 124: return "→"
-        case 125: return "↓"
-        case 126: return "↑"
-        default: return "Key\(keyCode)"
+        case 49: return L10n.tr("shortcut.key.space")
+        case 36: return L10n.tr("shortcut.key.return")
+        case 48: return L10n.tr("shortcut.key.tab")
+        case 51: return L10n.tr("shortcut.key.delete")
+        case 53: return L10n.tr("shortcut.key.escape_short")
+        case 123: return L10n.tr("shortcut.key.left_symbol")
+        case 124: return L10n.tr("shortcut.key.right_symbol")
+        case 125: return L10n.tr("shortcut.key.down_symbol")
+        case 126: return L10n.tr("shortcut.key.up_symbol")
+        default: return "\(L10n.tr("shortcut.key.prefix"))\(keyCode)"
         }
+    }
+
+    var appLanguage: AppLanguage {
+        get {
+            AppLanguage(rawValue: UserDefaults.standard.string(forKey: appLanguageKey) ?? "") ?? .system
+        }
+        set {
+            UserDefaults.standard.set(newValue.rawValue, forKey: appLanguageKey)
+        }
+    }
+}
+
+private extension Array {
+    subscript(safe index: Int) -> Element? {
+        guard indices.contains(index) else { return nil }
+        return self[index]
     }
 }

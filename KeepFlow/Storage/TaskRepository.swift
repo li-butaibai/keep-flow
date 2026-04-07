@@ -5,6 +5,8 @@ protocol TaskRepository {
     func save(_ task: Task) throws
     func findById(_ id: UUID) throws -> Task?
     func findAll(limit: Int) throws -> [Task]
+    func findVisibleTasks(limit: Int, now: Date) throws -> [Task]
+    func countVisibleTasks(now: Date) throws -> Int
     func findTodoTasks(limit: Int) throws -> [Task]
     func delete(_ id: UUID) throws
     func softDelete(_ id: UUID) throws
@@ -64,6 +66,63 @@ final class TaskRepositoryImpl: TaskRepository {
                 .order(Task.Columns.createdAt.desc)
                 .limit(limit)
                 .fetchAll(db)
+        }
+    }
+
+    func findVisibleTasks(limit: Int, now: Date) throws -> [Task] {
+        guard let dbQueue = dbQueue else { return [] }
+
+        let calendar = Calendar.current
+        let startOfDay = calendar.startOfDay(for: now)
+        guard let startOfTomorrow = calendar.date(byAdding: .day, value: 1, to: startOfDay) else {
+            return try findTodoTasks(limit: limit)
+        }
+
+        return try dbQueue.read { db in
+            try Task
+                .filter(Task.Columns.deletedAt == nil)
+                .filter(
+                    (Task.Columns.status == TaskStatus.todo.rawValue) ||
+                    (
+                        (Task.Columns.status == TaskStatus.done.rawValue) &&
+                        (Task.Columns.completedAt != nil) &&
+                        (Task.Columns.completedAt >= startOfDay) &&
+                        (Task.Columns.completedAt < startOfTomorrow)
+                    )
+                )
+                .order(
+                    // Keep unfinished work first, then today's completed items.
+                    SQL("CASE WHEN status = 'todo' THEN 0 ELSE 1 END"),
+                    Task.Columns.completedAt.desc,
+                    Task.Columns.createdAt.desc
+                )
+                .limit(limit)
+                .fetchAll(db)
+        }
+    }
+
+    func countVisibleTasks(now: Date) throws -> Int {
+        guard let dbQueue = dbQueue else { return 0 }
+
+        let calendar = Calendar.current
+        let startOfDay = calendar.startOfDay(for: now)
+        guard let startOfTomorrow = calendar.date(byAdding: .day, value: 1, to: startOfDay) else {
+            return try countByStatus(.todo)
+        }
+
+        return try dbQueue.read { db in
+            try Task
+                .filter(Task.Columns.deletedAt == nil)
+                .filter(
+                    (Task.Columns.status == TaskStatus.todo.rawValue) ||
+                    (
+                        (Task.Columns.status == TaskStatus.done.rawValue) &&
+                        (Task.Columns.completedAt != nil) &&
+                        (Task.Columns.completedAt >= startOfDay) &&
+                        (Task.Columns.completedAt < startOfTomorrow)
+                    )
+                )
+                .fetchCount(db)
         }
     }
 

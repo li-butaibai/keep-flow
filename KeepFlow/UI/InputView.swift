@@ -3,17 +3,16 @@ import AppKit
 
 struct InputView: View {
     @ObservedObject var viewModel: MainViewModel
+    @ObservedObject private var localization = LocalizationManager.shared
     @FocusState private var isFocused: Bool
-
-    private let placeholder = "捕捉灵感，按 Enter 保存..."
 
     var body: some View {
         HStack(spacing: 8) {
-            Image(systemName: "magnifyingglass")
+            Image(systemName: "square.and.pencil")
                 .foregroundColor(.gray)
                 .font(.system(size: 14, weight: .medium))
 
-            TextField(placeholder, text: $viewModel.inputText)
+            TextField(localization.localized("input.placeholder"), text: $viewModel.inputText)
                 .textFieldStyle(.plain)
                 .font(.system(size: 16))
                 .foregroundColor(.black)
@@ -32,7 +31,7 @@ struct InputView: View {
             }
         }
         .padding(.horizontal, 16)
-        .padding(.vertical, 12)
+        .frame(height: Constants.Layout.inputFieldHeight)
         .background(Color.white)
         .cornerRadius(10)
         .overlay(
