@@ -1,0 +1,22 @@
+# Binary artifacts
+*.pkg
+*.zip
+*.app
+
+# macOS
+.DS_Store
+**/.DS_Store
+
+# Xcode
+**/*.xcuserstate
+**/*.xcuserdata
+!KeepFlow.xcodeproj/xcuserdata/
+!KeepFlow.xcodeproj/project.xcworkspace/xcuserdata/
+
+# Build
+DerivedData/
+build/
+
+# Swift Package Manager
+.packages/
+*.xcworkspace/xcshareddata/swiftpm/Package.resolved

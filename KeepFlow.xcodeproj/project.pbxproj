@@ -1,0 +1,472 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		010108F103A73764E17A0C91 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5033170B3A3B350CA02B70F /* MainViewModel.swift */; };
+		1803DE6958BFCF3C094607B0 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E64D9BA5558DB3ACCF08773 /* main.swift */; };
+		19BA7EABBB971651B592E93E /* AppIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 773BE37B4B1058788048C925 /* AppIcon.icns */; };
+		19F820FF880A080EA3AEB33E /* TaskRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59BC7092F124CA8FE74A9399 /* TaskRepository.swift */; };
+		39B19B71AE9467688E0E884F /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F73143B157D423E1D74B59C /* DatabaseManager.swift */; };
+		3B00713DD5E13E2224FD13DD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0825ADF7B79910151B89769F /* AppDelegate.swift */; };
+		4BC08E075386A5F2887FE9E0 /* WindowManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145B6AF77521FB5ADCA67AC6 /* WindowManager.swift */; };
+		6A5AEA51AF122895405E1638 /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99CE702A9703E3B8FC9F296A /* InputView.swift */; };
+		A18720C0B4B4F650D5C369D0 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = A849FA492CC5AE2027BA8F1B /* Task.swift */; };
+		A57AA00C87826C4793A67784 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB475C19CBC0A3AC071405F /* MainView.swift */; };
+		BEB484959AF687B0558D7EE1 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0AD7257CDC987767B5602B /* Constants.swift */; };
+		C25FAFC6382910A4B7AF0096 /* TaskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED6C8425CBE011CCB1BB508 /* TaskManager.swift */; };
+		E8A6985DE2ACFBCFF13E7527 /* TaskListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54A52AA432F4693BAE41822E /* TaskListView.swift */; };
+		EA2B365374C0F41DBCD10019 /* TaskRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6093B42E16DD8AD7BEA7BE13 /* TaskRow.swift */; };
+		EDBF90836EC196FF41CDC126 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D296A4EC0795A87D79DF6F6E /* Assets.xcassets */; };
+		F85FB9D3DF65177A907E30F8 /* GRDB in Frameworks */ = {isa = PBXBuildFile; productRef = 316C367BDBB18C60D803FA36 /* GRDB */; };
+		F97C631C534B4F272684BB82 /* ShortcutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0977144907D2D14C2C61526 /* ShortcutManager.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0825ADF7B79910151B89769F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		145B6AF77521FB5ADCA67AC6 /* WindowManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowManager.swift; sourceTree = "<group>"; };
+		1E64D9BA5558DB3ACCF08773 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		23F046AF2630BB5528B7E85A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		3B2182BB85537FEC7CB8ED44 /* KeepFlow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KeepFlow.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		54A52AA432F4693BAE41822E /* TaskListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListView.swift; sourceTree = "<group>"; };
+		59BC7092F124CA8FE74A9399 /* TaskRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRepository.swift; sourceTree = "<group>"; };
+		5DB475C19CBC0A3AC071405F /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		6093B42E16DD8AD7BEA7BE13 /* TaskRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRow.swift; sourceTree = "<group>"; };
+		6C0AD7257CDC987767B5602B /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		773BE37B4B1058788048C925 /* AppIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = AppIcon.icns; sourceTree = "<group>"; };
+		7ED6C8425CBE011CCB1BB508 /* TaskManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskManager.swift; sourceTree = "<group>"; };
+		8F73143B157D423E1D74B59C /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
+		99CE702A9703E3B8FC9F296A /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
+		A849FA492CC5AE2027BA8F1B /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		D296A4EC0795A87D79DF6F6E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D5033170B3A3B350CA02B70F /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		E0977144907D2D14C2C61526 /* ShortcutManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutManager.swift; sourceTree = "<group>"; };
+		E251D35B0E25597EFD0DFBBB /* KeepFlow.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = KeepFlow.entitlements; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C00F1BBC49BFC5794BE0340B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F85FB9D3DF65177A907E30F8 /* GRDB in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0776C98D890EE3417CB75146 = {
+			isa = PBXGroup;
+			children = (
+				DFA563B66D88BD5BD87433C1 /* KeepFlow */,
+				BE29307B2FA58EB6298007DD /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		0E4DE1520D0F05A11AD4B177 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A849FA492CC5AE2027BA8F1B /* Task.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		1362564E31FECFFCF7E84552 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				E0977144907D2D14C2C61526 /* ShortcutManager.swift */,
+				7ED6C8425CBE011CCB1BB508 /* TaskManager.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		1F02DCB26356B64374A16CBA /* App */ = {
+			isa = PBXGroup;
+			children = (
+				0825ADF7B79910151B89769F /* AppDelegate.swift */,
+				1E64D9BA5558DB3ACCF08773 /* main.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		5AE7371A6E5C4006FCD4552C /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				99CE702A9703E3B8FC9F296A /* InputView.swift */,
+				5DB475C19CBC0A3AC071405F /* MainView.swift */,
+				54A52AA432F4693BAE41822E /* TaskListView.swift */,
+				6093B42E16DD8AD7BEA7BE13 /* TaskRow.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		6AA1FD285EB8BBF504653FE7 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				6C0AD7257CDC987767B5602B /* Constants.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		7E5B349A910AB226FD37CB1D /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				D5033170B3A3B350CA02B70F /* MainViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		7F929CC4C0916D0F4CB06F01 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				773BE37B4B1058788048C925 /* AppIcon.icns */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		BE29307B2FA58EB6298007DD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3B2182BB85537FEC7CB8ED44 /* KeepFlow.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C3E08493BE84EFB5BA6310AD /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				8F73143B157D423E1D74B59C /* DatabaseManager.swift */,
+				59BC7092F124CA8FE74A9399 /* TaskRepository.swift */,
+				0E4DE1520D0F05A11AD4B177 /* Models */,
+			);
+			path = Storage;
+			sourceTree = "<group>";
+		};
+		DFA563B66D88BD5BD87433C1 /* KeepFlow */ = {
+			isa = PBXGroup;
+			children = (
+				D296A4EC0795A87D79DF6F6E /* Assets.xcassets */,
+				23F046AF2630BB5528B7E85A /* Info.plist */,
+				E251D35B0E25597EFD0DFBBB /* KeepFlow.entitlements */,
+				1F02DCB26356B64374A16CBA /* App */,
+				7F929CC4C0916D0F4CB06F01 /* Resources */,
+				1362564E31FECFFCF7E84552 /* Services */,
+				C3E08493BE84EFB5BA6310AD /* Storage */,
+				F4197FF57A6DC26A9A079BAC /* System */,
+				5AE7371A6E5C4006FCD4552C /* UI */,
+				6AA1FD285EB8BBF504653FE7 /* Utils */,
+				7E5B349A910AB226FD37CB1D /* ViewModels */,
+			);
+			path = KeepFlow;
+			sourceTree = "<group>";
+		};
+		F4197FF57A6DC26A9A079BAC /* System */ = {
+			isa = PBXGroup;
+			children = (
+				145B6AF77521FB5ADCA67AC6 /* WindowManager.swift */,
+			);
+			path = System;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B39A3E32CF2EDDC834961A52 /* KeepFlow */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4E2AEC03B803DCE14E1BD71F /* Build configuration list for PBXNativeTarget "KeepFlow" */;
+			buildPhases = (
+				4E4836767B1B896A1DE90A29 /* Sources */,
+				E8ACB49509CB77C061B7C0DA /* Resources */,
+				C00F1BBC49BFC5794BE0340B /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = KeepFlow;
+			packageProductDependencies = (
+				316C367BDBB18C60D803FA36 /* GRDB */,
+			);
+			productName = KeepFlow;
+			productReference = 3B2182BB85537FEC7CB8ED44 /* KeepFlow.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		4E21E581F55734A96E2430E9 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					B39A3E32CF2EDDC834961A52 = {
+						ProvisioningStyle = Manual;
+					};
+				};
+			};
+			buildConfigurationList = 0F3313A1370EE537255E721F /* Build configuration list for PBXProject "KeepFlow" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 0776C98D890EE3417CB75146;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				E2ADB80F95701384333ED8AF /* XCRemoteSwiftPackageReference "GRDB.swift" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = BE29307B2FA58EB6298007DD /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B39A3E32CF2EDDC834961A52 /* KeepFlow */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		E8ACB49509CB77C061B7C0DA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				19BA7EABBB971651B592E93E /* AppIcon.icns in Resources */,
+				EDBF90836EC196FF41CDC126 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4E4836767B1B896A1DE90A29 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3B00713DD5E13E2224FD13DD /* AppDelegate.swift in Sources */,
+				BEB484959AF687B0558D7EE1 /* Constants.swift in Sources */,
+				39B19B71AE9467688E0E884F /* DatabaseManager.swift in Sources */,
+				6A5AEA51AF122895405E1638 /* InputView.swift in Sources */,
+				A57AA00C87826C4793A67784 /* MainView.swift in Sources */,
+				010108F103A73764E17A0C91 /* MainViewModel.swift in Sources */,
+				F97C631C534B4F272684BB82 /* ShortcutManager.swift in Sources */,
+				A18720C0B4B4F650D5C369D0 /* Task.swift in Sources */,
+				E8A6985DE2ACFBCFF13E7527 /* TaskListView.swift in Sources */,
+				C25FAFC6382910A4B7AF0096 /* TaskManager.swift in Sources */,
+				19F820FF880A080EA3AEB33E /* TaskRepository.swift in Sources */,
+				EA2B365374C0F41DBCD10019 /* TaskRow.swift in Sources */,
+				4BC08E075386A5F2887FE9E0 /* WindowManager.swift in Sources */,
+				1803DE6958BFCF3C094607B0 /* main.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		0E8BAE1A85403130ED25AFA2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_ENTITLEMENTS = KeepFlow/KeepFlow.entitlements;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = KeepFlow/Info.plist;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = KeepFlow;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.9;
+			};
+			name = Release;
+		};
+		BDA54D8E1A3F43210AA348EF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = KeepFlow/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.keepflow.app;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		E020008E859FBC32995C771E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = KeepFlow/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.keepflow.app;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		E7D7E1ADF7426FD30CA1B37F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_ENTITLEMENTS = KeepFlow/KeepFlow.entitlements;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = KeepFlow/Info.plist;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = KeepFlow;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.9;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0F3313A1370EE537255E721F /* Build configuration list for PBXProject "KeepFlow" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E7D7E1ADF7426FD30CA1B37F /* Debug */,
+				0E8BAE1A85403130ED25AFA2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		4E2AEC03B803DCE14E1BD71F /* Build configuration list for PBXNativeTarget "KeepFlow" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BDA54D8E1A3F43210AA348EF /* Debug */,
+				E020008E859FBC32995C771E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		E2ADB80F95701384333ED8AF /* XCRemoteSwiftPackageReference "GRDB.swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/groue/GRDB.swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		316C367BDBB18C60D803FA36 /* GRDB */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E2ADB80F95701384333ED8AF /* XCRemoteSwiftPackageReference "GRDB.swift" */;
+			productName = GRDB;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 4E21E581F55734A96E2430E9 /* Project object */;
+}

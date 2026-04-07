@@ -1,0 +1,98 @@
+@startuml KeepFlow_Domain_Model
+skinparam dpi 150
+skinparam backgroundColor #FEFEFE
+hide empty members
+
+package "Domain Layer" {
+
+  class Task {
+    + id: UUID <<immutable>>
+    + content: String <<immutable>>
+    + createdAt: Date <<immutable>>
+    --
+    + status: TaskStatus
+    + completedAt: Date?
+    + deletedAt: Date?
+    --
+    + markAsDone(): Task
+    + markAsTodo(): Task
+    + softDelete(): Task
+    + isActive: Bool
+    + isDone: Bool
+    + isTodo: Bool
+  }
+
+  enum TaskStatus {
+    + todo
+    + done
+  }
+
+  interface TaskRepository {
+    + save(task: Task): Void
+    + findById(id: UUID): Task?
+    + findAll(limit: Int): Task[]
+    + findTodoTasks(limit: Int): Task[]
+    + delete(id: UUID): Void
+    + softDelete(id: UUID): Void
+    + countByStatus(status: TaskStatus): Int
+  }
+
+  class TaskCreationError {
+    + emptyContent: TaskCreationError
+  }
+
+  Task --> TaskStatus : status
+  Task --> TaskCreationError : creates via factory
+}
+
+package "Infrastructure Layer" {
+
+  class TaskRecord {
+    + id: UUID
+    + content: String
+    + status: String
+    + createdAt: Date
+    + completedAt: Date?
+    + deletedAt: Date?
+    + taskType: String?
+    --
+    + toDomain(): Task
+    + fromDomain(task: Task): TaskRecord
+  }
+
+  class TaskRepositoryImpl {
+    + dbQueue: DatabaseQueue
+    --
+    + save(task: Task): Void
+    + findAll(limit: Int): Task[]
+    + findTodoTasks(limit: Int): Task[]
+    + softDelete(id: UUID): Void
+  }
+
+  TaskRepositoryImpl ..|> TaskRepository
+  TaskRecord --> Task : maps to
+
+}
+
+note bottom of Task
+**Entity** (not Value Object)
+Identity: id (UUID) persists across state changes
+Mutation: All operations return **new instance** (immutable)
+Validation: content non-empty, whitespace-trimmed
+end note
+
+note bottom of TaskRepository
+**Repository Pattern**
+Separates domain from persistence details
+Enables in-memory mock for testing
+end note
+
+note bottom of TaskRecord
+**GRDB Mapping**
+Nullable columns for future extension:
+- taskType (Task/Follow-up/Idea)
+- completedAt (explicit completion time)
+- deletedAt (soft-delete timestamp)
+end note
+
+@enduml
