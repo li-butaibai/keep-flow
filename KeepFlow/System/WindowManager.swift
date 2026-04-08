@@ -100,8 +100,8 @@ class WindowManager {
         mainViewModel?.inputText = ""
         mainViewModel?.interactionMode = .input
         mainViewModel?.selectedIndex = 0
-        mainViewModel?.resetTaskPagination()
-        mainViewModel?.fetchTasks()
+        mainViewModel?.resetFlowPagination()
+        mainViewModel?.fetchFlows()
         mainViewModel?.shouldResetFocus = true
 
         // Resize panel based on content
@@ -132,7 +132,7 @@ class WindowManager {
             return
         }
 
-        // Calculate height: InputView (44) + TaskListView (0 or auto)
+        // Calculate height: InputView (44) + FlowListView (0 or auto)
         let inputHeight: CGFloat = Constants.Layout.inputFieldHeight
         // Reset hostingView to calculate true content size
         hostingView.frame.size = NSSize(width: Constants.Window.width, height: 0)

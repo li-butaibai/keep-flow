@@ -1,13 +1,13 @@
 "app.name" = "KeepFlow";
 "app.slogan" = "Keep your flow, capture your thoughts";
 "input.placeholder" = "捕捉灵感，按 Enter 保存...";
-"tasks.load_more" = "更多";
+"flows.load_more" = "更多";
 "date.yesterday" = "昨天";
 "menu.open_keepflow" = "打开 KeepFlow";
 "menu.settings" = "设置...";
 "menu.quit" = "退出";
 "settings.title" = "KeepFlow 设置";
-"settings.task_limit" = "默认显示任务数量:";
+"settings.flow_limit" = "默认显示条目数量:";
 "settings.shortcut" = "唤醒快捷键:";
 "settings.language" = "语言:";
 "settings.press_shortcut" = "按下快捷键...";

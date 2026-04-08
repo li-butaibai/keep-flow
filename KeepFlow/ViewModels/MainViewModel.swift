@@ -3,11 +3,11 @@ import Combine
 
 class MainViewModel: ObservableObject {
     @Published var inputText: String = ""
-    @Published var tasks: [Task] = []
+    @Published var flows: [Flow] = []
     @Published var selectedIndex: Int = 0
     @Published var shouldResetFocus: Bool = false
-    @Published var visibleTaskLimit: Int = AppSettings.shared.taskListLimit
-    @Published var totalVisibleTaskCount: Int = 0
+    @Published var visibleFlowLimit: Int = AppSettings.shared.flowListLimit
+    @Published var totalVisibleFlowCount: Int = 0
 
     enum InteractionMode {
         case input
@@ -16,44 +16,44 @@ class MainViewModel: ObservableObject {
     @Published var interactionMode: InteractionMode = .input
 
     init() {
-        fetchTasks()
+        fetchFlows()
     }
 
     func submit() {
         let content = inputText.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !content.isEmpty else { return }
 
-        let result = TaskManager.shared.addTask(content: content)
+        let result = FlowManager.shared.addFlow(content: content)
         switch result {
         case .success:
             inputText = ""
-            fetchTasks()
+            fetchFlows()
         case .failure(let error):
-            print("Failed to add task: \(error)")
+            print("Failed to add flow: \(error)")
         }
     }
 
-    func completeTask(at index: Int) {
-        guard index >= 0 && index < tasks.count else { return }
-        let task = tasks[index]
+    func completeFlow(at index: Int) {
+        guard index >= 0 && index < flows.count else { return }
+        let flow = flows[index]
 
         do {
-            try TaskManager.shared.completeTask(id: task.id)
-            fetchTasks()
+            try FlowManager.shared.completeFlow(id: flow.id)
+            fetchFlows()
         } catch {
-            print("Failed to complete task: \(error)")
+            print("Failed to complete flow: \(error)")
         }
     }
 
-    func fetchTasks() {
-        totalVisibleTaskCount = TaskManager.shared.visibleTaskCount()
-        tasks = TaskManager.shared.fetchTasks(limit: visibleTaskLimit)
+    func fetchFlows() {
+        totalVisibleFlowCount = FlowManager.shared.visibleFlowCount()
+        flows = FlowManager.shared.fetchFlows(limit: visibleFlowLimit)
 
-        if tasks.isEmpty {
+        if flows.isEmpty {
             interactionMode = .input
             selectedIndex = 0
         } else {
-            selectedIndex = min(selectedIndex, tasks.count - 1)
+            selectedIndex = min(selectedIndex, flows.count - 1)
         }
 
         DispatchQueue.main.async {
@@ -63,37 +63,37 @@ class MainViewModel: ObservableObject {
         }
     }
 
-    func resetTaskPagination() {
-        visibleTaskLimit = AppSettings.shared.taskListLimit
+    func resetFlowPagination() {
+        visibleFlowLimit = AppSettings.shared.flowListLimit
     }
 
-    func loadMoreTasks() {
-        guard hasMoreTasks else { return }
-        visibleTaskLimit += Constants.Layout.taskListPageSize
-        fetchTasks()
+    func loadMoreFlows() {
+        guard hasMoreFlows else { return }
+        visibleFlowLimit += Constants.Layout.flowListPageSize
+        fetchFlows()
     }
 
-    var hasMoreTasks: Bool {
-        tasks.count < totalVisibleTaskCount
+    var hasMoreFlows: Bool {
+        flows.count < totalVisibleFlowCount
     }
 
     func selectNext() {
-        guard !tasks.isEmpty else { return }
+        guard !flows.isEmpty else { return }
         if interactionMode == .input {
             interactionMode = .selection
             selectedIndex = 0
         } else {
-            selectedIndex = min(selectedIndex + 1, tasks.count - 1)
+            selectedIndex = min(selectedIndex + 1, flows.count - 1)
         }
     }
 
     func selectPrevious() {
-        guard !tasks.isEmpty else { return }
+        guard !flows.isEmpty else { return }
         selectedIndex = max(selectedIndex - 1, 0)
     }
 
     func confirmSelection() {
-        guard interactionMode == .selection && selectedIndex < tasks.count else { return }
-        completeTask(at: selectedIndex)
+        guard interactionMode == .selection && selectedIndex < flows.count else { return }
+        completeFlow(at: selectedIndex)
     }
 }

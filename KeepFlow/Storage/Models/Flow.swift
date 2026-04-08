@@ -1,28 +1,28 @@
 import Foundation
 import GRDB
 
-enum TaskStatus: String, Codable, DatabaseValueConvertible {
+enum FlowStatus: String, Codable, DatabaseValueConvertible {
     case todo
     case done
 }
 
-struct Task: Identifiable, Codable, Equatable {
+struct Flow: Identifiable, Codable, Equatable {
     let id: UUID
     var content: String
-    var status: TaskStatus
+    var status: FlowStatus
     var createdAt: Date
     var completedAt: Date?
     var deletedAt: Date?
-    var taskType: String?
+    var flowType: String?
 
     init(
         id: UUID = UUID(),
         content: String,
-        status: TaskStatus = .todo,
+        status: FlowStatus = .todo,
         createdAt: Date = Date(),
         completedAt: Date? = nil,
         deletedAt: Date? = nil,
-        taskType: String? = nil
+        flowType: String? = nil
     ) {
         self.id = id
         self.content = content
@@ -30,16 +30,16 @@ struct Task: Identifiable, Codable, Equatable {
         self.createdAt = createdAt
         self.completedAt = completedAt
         self.deletedAt = deletedAt
-        self.taskType = taskType
+        self.flowType = flowType
     }
 }
 
 // MARK: - GRDB Conformance
 
-extension Task: FetchableRecord, PersistableRecord {
-    static let databaseTableName = "tasks"
+extension Flow: FetchableRecord, PersistableRecord {
+    static let databaseTableName = "flows"
 
     enum Columns: String, ColumnExpression {
-        case id, content, status, createdAt, completedAt, deletedAt, taskType
+        case id, content, status, createdAt, completedAt, deletedAt, flowType
     }
 }

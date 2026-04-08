@@ -1,13 +1,13 @@
 "app.name" = "KeepFlow";
 "app.slogan" = "Keep your flow, capture your thoughts";
 "input.placeholder" = "アイデアを記録し、Enterで保存...";
-"tasks.load_more" = "もっと見る";
+"flows.load_more" = "もっと見る";
 "date.yesterday" = "昨日";
 "menu.open_keepflow" = "KeepFlowを開く";
 "menu.settings" = "設定...";
 "menu.quit" = "終了";
 "settings.title" = "KeepFlow 設定";
-"settings.task_limit" = "既定の表示タスク数:";
+"settings.flow_limit" = "既定の表示フロー数:";
 "settings.shortcut" = "起動ショートカット:";
 "settings.language" = "言語:";
 "settings.press_shortcut" = "ショートカットを押してください...";

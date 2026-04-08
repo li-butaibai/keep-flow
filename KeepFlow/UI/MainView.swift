@@ -14,7 +14,7 @@ struct MainView: View {
                 InputView(viewModel: viewModel)
                     .frame(height: Constants.Layout.inputFieldHeight)
 
-                if viewModel.tasks.count > 0 {
+                if viewModel.flows.count > 0 {
                     Divider()
                         .background(Color.gray.opacity(0.35))
 
@@ -28,8 +28,8 @@ struct MainView: View {
                     }
                 }
 
-                taskListContainer
-                    .frame(maxHeight: Constants.Layout.taskListMaxHeight)
+                flowListContainer
+                    .frame(maxHeight: Constants.Layout.flowListMaxHeight)
             }
             .padding(Constants.Layout.contentPadding)
         }
@@ -38,9 +38,9 @@ struct MainView: View {
     }
 
     @ViewBuilder
-    private var taskListContainer: some View {
-        if viewModel.tasks.count > 0 {
-            TaskListView(viewModel: viewModel)
+    private var flowListContainer: some View {
+        if viewModel.flows.count > 0 {
+            FlowListView(viewModel: viewModel)
         } else {
             EmptyView()
         }

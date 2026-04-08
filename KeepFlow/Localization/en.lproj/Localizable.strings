@@ -1,13 +1,13 @@
 "app.name" = "KeepFlow";
 "app.slogan" = "Keep your flow, capture your thoughts";
 "input.placeholder" = "Capture your thoughts, press Enter to save...";
-"tasks.load_more" = "More";
+"flows.load_more" = "More";
 "date.yesterday" = "Yesterday";
 "menu.open_keepflow" = "Open KeepFlow";
 "menu.settings" = "Settings...";
 "menu.quit" = "Quit";
 "settings.title" = "KeepFlow Settings";
-"settings.task_limit" = "Default visible tasks:";
+"settings.flow_limit" = "Default visible flows:";
 "settings.shortcut" = "Activation shortcut:";
 "settings.language" = "Language:";
 "settings.press_shortcut" = "Press shortcut...";

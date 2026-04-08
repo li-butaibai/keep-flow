@@ -1,18 +1,18 @@
 import SwiftUI
 
-struct TaskListView: View {
+struct FlowListView: View {
     @ObservedObject var viewModel: MainViewModel
     @ObservedObject private var localization = LocalizationManager.shared
 
     var body: some View {
         ScrollView {
             VStack(spacing: 0) {
-                ForEach(Array(viewModel.tasks.enumerated()), id: \.element.id) { index, task in
-                    TaskRow(
-                        task: task,
+                ForEach(Array(viewModel.flows.enumerated()), id: \.element.id) { index, flow in
+                    FlowRow(
+                        flow: flow,
                         isSelected: viewModel.interactionMode == .selection && index == viewModel.selectedIndex,
                         onStatusTap: {
-                            viewModel.completeTask(at: index)
+                            viewModel.completeFlow(at: index)
                         }
                     )
                         .onTapGesture {
@@ -20,17 +20,17 @@ struct TaskListView: View {
                             viewModel.interactionMode = .selection
                         }
 
-                    if index < viewModel.tasks.count - 1 {
+                    if index < viewModel.flows.count - 1 {
                         Divider()
                             .background(Color.gray.opacity(0.12))
                     }
                 }
 
-                if viewModel.hasMoreTasks {
+                if viewModel.hasMoreFlows {
                     Button(action: {
-                        viewModel.loadMoreTasks()
+                        viewModel.loadMoreFlows()
                     }) {
-                        Text(localization.localized("tasks.load_more"))
+                        Text(localization.localized("flows.load_more"))
                             .font(.system(size: 12, weight: .medium))
                             .foregroundColor(.secondary)
                             .frame(maxWidth: .infinity)

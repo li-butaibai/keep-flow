@@ -1,13 +1,13 @@
 "app.name" = "KeepFlow";
 "app.slogan" = "Keep your flow, capture your thoughts";
 "input.placeholder" = "생각을 기록하고 Enter로 저장...";
-"tasks.load_more" = "더 보기";
+"flows.load_more" = "더 보기";
 "date.yesterday" = "어제";
 "menu.open_keepflow" = "KeepFlow 열기";
 "menu.settings" = "설정...";
 "menu.quit" = "종료";
 "settings.title" = "KeepFlow 설정";
-"settings.task_limit" = "기본 표시 작업 수:";
+"settings.flow_limit" = "기본 표시 플로우 수:";
 "settings.shortcut" = "실행 단축키:";
 "settings.language" = "언어:";
 "settings.press_shortcut" = "단축키를 누르세요...";

@@ -52,15 +52,15 @@ final class DatabaseManager {
 
         var migrator = DatabaseMigrator()
 
-        migrator.registerMigration("v1_create_tasks") { db in
-            try db.create(table: "tasks", ifNotExists: true) { t in
+        migrator.registerMigration("v1_create_flows") { db in
+            try db.create(table: "flows", ifNotExists: true) { t in
                 t.column("id", .text).primaryKey()
                 t.column("content", .text).notNull()
                 t.column("status", .text).notNull()
                 t.column("createdAt", .datetime).notNull()
                 t.column("completedAt", .datetime)
                 t.column("deletedAt", .datetime)
-                t.column("taskType", .text)
+                t.column("flowType", .text)
             }
         }
 
@@ -70,22 +70,22 @@ final class DatabaseManager {
     private func retryFallbackQueue() throws {
         guard let dbQueue = dbQueue else { return }
 
-        let failedTasks = fallbackQueue.drain()
-        for task in failedTasks {
+        let failedFlows = fallbackQueue.drain()
+        for flow in failedFlows {
             do {
                 try dbQueue.write { db in
-                    try task.save(db)
+                    try flow.save(db)
                 }
             } catch {
                 // Still failing, add back to queue for next retry
-                fallbackQueue.enqueue(task)
-                print("Failed to retry task \(task.id): \(error)")
+                fallbackQueue.enqueue(flow)
+                print("Failed to retry flow \(flow.id): \(error)")
             }
         }
     }
 
-    func addToFallbackQueue(_ task: Task) {
-        fallbackQueue.enqueue(task)
+    func addToFallbackQueue(_ flow: Flow) {
+        fallbackQueue.enqueue(flow)
     }
 
     func fallbackQueueCount() -> Int {
@@ -96,23 +96,23 @@ final class DatabaseManager {
 // MARK: - In-Memory Fallback Queue
 
 final class InMemoryFallbackQueue {
-    private var queue: [Task] = []
-    private let queueKey = "com.keepflow.failed_tasks"
+    private var queue: [Flow] = []
+    private let queueKey = "com.keepflow.failed_flows"
 
     init() {
         loadFromDisk()
     }
 
-    func enqueue(_ task: Task) {
-        queue.append(task)
+    func enqueue(_ flow: Flow) {
+        queue.append(flow)
         saveToDisk()
     }
 
-    func drain() -> [Task] {
-        let tasks = queue
+    func drain() -> [Flow] {
+        let flows = queue
         queue.removeAll()
         saveToDisk()
-        return tasks
+        return flows
     }
 
     var count: Int {
@@ -126,9 +126,9 @@ final class InMemoryFallbackQueue {
 
     private func loadFromDisk() {
         guard let data = UserDefaults.standard.data(forKey: queueKey),
-              let tasks = try? JSONDecoder().decode([Task].self, from: data) else {
+              let flows = try? JSONDecoder().decode([Flow].self, from: data) else {
             return
         }
-        queue = tasks
+        queue = flows
     }
 }

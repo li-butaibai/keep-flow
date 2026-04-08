@@ -1,13 +1,13 @@
 "app.name" = "KeepFlow";
 "app.slogan" = "Keep your flow, capture your thoughts";
 "input.placeholder" = "Cattura i tuoi pensieri, premi Invio per salvare...";
-"tasks.load_more" = "Altro";
+"flows.load_more" = "Altro";
 "date.yesterday" = "Ieri";
 "menu.open_keepflow" = "Apri KeepFlow";
 "menu.settings" = "Impostazioni...";
 "menu.quit" = "Esci";
 "settings.title" = "Impostazioni KeepFlow";
-"settings.task_limit" = "Numero predefinito di attività visibili:";
+"settings.flow_limit" = "Numero predefinito di flussi visibili:";
 "settings.shortcut" = "Scorciatoia di attivazione:";
 "settings.language" = "Lingua:";
 "settings.press_shortcut" = "Premi la scorciatoia...";

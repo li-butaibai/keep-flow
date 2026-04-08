@@ -113,7 +113,7 @@ class SettingsWindow: NSWindow {
 
 class SettingsViewController: NSViewController {
 
-    private var taskLimitField: NSTextField!
+    private var flowLimitField: NSTextField!
     private var shortcutRecordView: ShortcutRecordView!
     private var languagePopupButton: NSPopUpButton!
 
@@ -127,15 +127,15 @@ class SettingsViewController: NSViewController {
     }
 
     private func setupUI() {
-        // Task limit setting
-        let taskLimitLabel = NSTextField(labelWithString: L10n.tr("settings.task_limit"))
-        taskLimitLabel.frame = NSRect(x: 20, y: 190, width: 160, height: 24)
-        view.addSubview(taskLimitLabel)
+        // Flow limit setting
+        let flowLimitLabel = NSTextField(labelWithString: L10n.tr("settings.flow_limit"))
+        flowLimitLabel.frame = NSRect(x: 20, y: 190, width: 160, height: 24)
+        view.addSubview(flowLimitLabel)
 
-        taskLimitField = NSTextField(frame: NSRect(x: 190, y: 190, width: 60, height: 24))
-        taskLimitField.stringValue = "\(AppSettings.shared.taskListLimit)"
-        taskLimitField.alignment = .center
-        view.addSubview(taskLimitField)
+        flowLimitField = NSTextField(frame: NSRect(x: 190, y: 190, width: 60, height: 24))
+        flowLimitField.stringValue = "\(AppSettings.shared.flowListLimit)"
+        flowLimitField.alignment = .center
+        view.addSubview(flowLimitField)
 
         // Shortcut setting
         let shortcutLabel = NSTextField(labelWithString: L10n.tr("settings.shortcut"))
@@ -166,8 +166,8 @@ class SettingsViewController: NSViewController {
     }
 
     @objc private func saveSettings() {
-        if let limit = Int(taskLimitField.stringValue), limit > 0 && limit <= 20 {
-            AppSettings.shared.taskListLimit = limit
+        if let limit = Int(flowLimitField.stringValue), limit > 0 && limit <= 20 {
+            AppSettings.shared.flowListLimit = limit
         }
 
         AppSettings.shared.shortcutKeyCode = shortcutRecordView.keyCode
@@ -260,20 +260,20 @@ class ShortcutRecordView: NSView {
 class AppSettings {
     static let shared = AppSettings()
 
-    private let taskLimitKey = "com.keepflow.taskListLimit"
+    private let flowLimitKey = "com.keepflow.flowListLimit"
     private let shortcutKeyCodeKey = "com.keepflow.shortcutKeyCode"
     private let shortcutModifiersKey = "com.keepflow.shortcutModifiers"
     private let appLanguageKey = "com.keepflow.appLanguage"
 
     private init() {}
 
-    var taskListLimit: Int {
+    var flowListLimit: Int {
         get {
-            let value = UserDefaults.standard.integer(forKey: taskLimitKey)
-            return value > 0 ? value : Constants.Layout.taskListLimit
+            let value = UserDefaults.standard.integer(forKey: flowLimitKey)
+            return value > 0 ? value : Constants.Layout.flowListLimit
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: taskLimitKey)
+            UserDefaults.standard.set(newValue, forKey: flowLimitKey)
         }
     }
 
