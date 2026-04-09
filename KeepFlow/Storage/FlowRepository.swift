@@ -5,8 +5,7 @@ protocol FlowRepository {
     func save(_ flow: Flow) throws
     func findById(_ id: UUID) throws -> Flow?
     func findAll(limit: Int) throws -> [Flow]
-    func findVisibleFlows(limit: Int, now: Date) throws -> [Flow]
-    func countVisibleFlows(now: Date) throws -> Int
+    func countAll() throws -> Int
     func findTodoFlows(limit: Int) throws -> [Flow]
     func delete(_ id: UUID) throws
     func softDelete(_ id: UUID) throws
@@ -50,9 +49,23 @@ final class FlowRepositoryImpl: FlowRepository {
         return try dbQueue.read { db in
             try Flow
                 .filter(Flow.Columns.deletedAt == nil)
-                .order(Flow.Columns.createdAt.desc)
+                .order(
+                    // Keep incomplete tasks first, then completed ones
+                    SQL("CASE WHEN status = 'todo' THEN 0 ELSE 1 END"),
+                    Flow.Columns.createdAt.desc
+                )
                 .limit(limit)
                 .fetchAll(db)
+        }
+    }
+
+    func countAll() throws -> Int {
+        guard let dbQueue = dbQueue else { return 0 }
+
+        return try dbQueue.read { db in
+            try Flow
+                .filter(Flow.Columns.deletedAt == nil)
+                .fetchCount(db)
         }
     }
 
@@ -66,63 +79,6 @@ final class FlowRepositoryImpl: FlowRepository {
                 .order(Flow.Columns.createdAt.desc)
                 .limit(limit)
                 .fetchAll(db)
-        }
-    }
-
-    func findVisibleFlows(limit: Int, now: Date) throws -> [Flow] {
-        guard let dbQueue = dbQueue else { return [] }
-
-        let calendar = Calendar.current
-        let startOfDay = calendar.startOfDay(for: now)
-        guard let startOfTomorrow = calendar.date(byAdding: .day, value: 1, to: startOfDay) else {
-            return try findTodoFlows(limit: limit)
-        }
-
-        return try dbQueue.read { db in
-            try Flow
-                .filter(Flow.Columns.deletedAt == nil)
-                .filter(
-                    (Flow.Columns.status == FlowStatus.todo.rawValue) ||
-                    (
-                        (Flow.Columns.status == FlowStatus.done.rawValue) &&
-                        (Flow.Columns.completedAt != nil) &&
-                        (Flow.Columns.completedAt >= startOfDay) &&
-                        (Flow.Columns.completedAt < startOfTomorrow)
-                    )
-                )
-                .order(
-                    // Keep unfinished work first, then today's completed items.
-                    SQL("CASE WHEN status = 'todo' THEN 0 ELSE 1 END"),
-                    Flow.Columns.completedAt.desc,
-                    Flow.Columns.createdAt.desc
-                )
-                .limit(limit)
-                .fetchAll(db)
-        }
-    }
-
-    func countVisibleFlows(now: Date) throws -> Int {
-        guard let dbQueue = dbQueue else { return 0 }
-
-        let calendar = Calendar.current
-        let startOfDay = calendar.startOfDay(for: now)
-        guard let startOfTomorrow = calendar.date(byAdding: .day, value: 1, to: startOfDay) else {
-            return try countByStatus(.todo)
-        }
-
-        return try dbQueue.read { db in
-            try Flow
-                .filter(Flow.Columns.deletedAt == nil)
-                .filter(
-                    (Flow.Columns.status == FlowStatus.todo.rawValue) ||
-                    (
-                        (Flow.Columns.status == FlowStatus.done.rawValue) &&
-                        (Flow.Columns.completedAt != nil) &&
-                        (Flow.Columns.completedAt >= startOfDay) &&
-                        (Flow.Columns.completedAt < startOfTomorrow)
-                    )
-                )
-                .fetchCount(db)
         }
     }
 

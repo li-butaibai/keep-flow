@@ -51,7 +51,7 @@ final class FlowManager {
 
     func fetchFlows(limit: Int = 5) -> [Flow] {
         do {
-            return try repository.findVisibleFlows(limit: limit, now: Date())
+            return try repository.findAll(limit: limit)
         } catch {
             print("Failed to fetch flows: \(error)")
             return []
@@ -60,9 +60,9 @@ final class FlowManager {
 
     func visibleFlowCount() -> Int {
         do {
-            return try repository.countVisibleFlows(now: Date())
+            return try repository.countAll()
         } catch {
-            print("Failed to count visible flows: \(error)")
+            print("Failed to count all flows: \(error)")
             return 0
         }
     }
