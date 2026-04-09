@@ -100,6 +100,7 @@ class WindowManager {
         mainViewModel?.inputText = ""
         mainViewModel?.interactionMode = .input
         mainViewModel?.selectedIndex = 0
+        mainViewModel?.editingFlowId = nil
         mainViewModel?.resetFlowPagination()
         mainViewModel?.fetchFlows()
         mainViewModel?.shouldResetFocus = true
@@ -227,6 +228,11 @@ class WindowManager {
             return true
         }
 
+        if keyCode == 120, mainViewModel?.interactionMode == .selection { // F2
+            mainViewModel?.loadFlowForEditing()
+            return true
+        }
+
         return false
     }
 }
@@ -238,8 +244,12 @@ class KeepFlowPanel: NSPanel {
     override var canBecomeMain: Bool { true }
 
     override func cancelOperation(_ sender: Any?) {
-        // ESC key - close immediately
-        WindowManager.shared.close()
+        // ESC key - if editing, cancel edit; otherwise close
+        if WindowManager.shared.mainViewModel?.editingFlowId != nil {
+            WindowManager.shared.mainViewModel?.cancelEditing()
+        } else {
+            WindowManager.shared.close()
+        }
     }
 
     override func keyDown(with event: NSEvent) {

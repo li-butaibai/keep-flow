@@ -28,6 +28,14 @@ final class FlowManager {
         try repository.save(flow)
     }
 
+    func updateFlow(id: UUID, content: String) throws {
+        guard var flow = try repository.findById(id) else {
+            throw FlowError.notFound
+        }
+        flow.content = content
+        try repository.save(flow)
+    }
+
     func undoComplete(id: UUID) throws {
         guard var flow = try repository.findById(id) else {
             throw FlowError.notFound

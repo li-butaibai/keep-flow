@@ -14,12 +14,17 @@ class MainViewModel: ObservableObject {
         case selection
     }
     @Published var interactionMode: InteractionMode = .input
+    @Published var editingFlowId: UUID? = nil
 
     init() {
         fetchFlows()
     }
 
     func submit() {
+        if editingFlowId != nil {
+            saveEditedFlow()
+            return
+        }
         let content = inputText.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !content.isEmpty else { return }
 
@@ -95,5 +100,35 @@ class MainViewModel: ObservableObject {
     func confirmSelection() {
         guard interactionMode == .selection && selectedIndex < flows.count else { return }
         completeFlow(at: selectedIndex)
+    }
+
+    func loadFlowForEditing() {
+        guard interactionMode == .selection && selectedIndex < flows.count else { return }
+        let flow = flows[selectedIndex]
+        editingFlowId = flow.id
+        inputText = flow.content
+        interactionMode = .input
+        shouldResetFocus = true
+    }
+
+    func cancelEditing() {
+        editingFlowId = nil
+        inputText = ""
+    }
+
+    func saveEditedFlow() {
+        guard let editingId = editingFlowId else { return }
+        let content = inputText.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !content.isEmpty else { return }
+
+        do {
+            try FlowManager.shared.updateFlow(id: editingId, content: content)
+            editingFlowId = nil
+            inputText = ""
+            fetchFlows()
+            WindowManager.shared.close()
+        } catch {
+            print("Failed to update flow: \(error)")
+        }
     }
 }

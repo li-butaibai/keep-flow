@@ -11,7 +11,7 @@ Slogan:
 
 ### 产品定位
 
-KeepFlow 是一个“思维缓冲层”。
+KeepFlow 是一个”思维缓冲层”。
 
 核心目标：
 - 即时捕捉
@@ -21,25 +21,61 @@ KeepFlow 是一个“思维缓冲层”。
 典型操作路径：
 `Shift + Space -> 输入 -> Enter -> 关闭`
 
-### 当前功能
+### 功能清单
 
-- 全局快捷键唤起浮层窗口
-- 菜单栏常驻运行，无 Dock 图标
-- 输入内容后按 `Enter` 保存
-- `Esc` 或 `Shift + Enter` 关闭窗口
-- 支持任务列表展示、选择和完成
-- 支持分页加载更多任务
-- 支持 SQLite 持久化
-- 支持多语言
-  - 简体中文
-  - English
-  - 日本語
-  - 한국어
-  - Français
-  - Deutsch
-  - Italiano
-  - 繁體中文
-- 设置中可选择语言，默认跟随系统
+| 功能 | 状态 |
+| --- | --- |
+| 全局快捷键唤起（Shift + Space） | ✅ |
+| 菜单栏常驻，无 Dock 图标 | ✅ |
+| 输入保存（Enter） | ✅ |
+| 关闭面板（Esc / Shift + Enter） | ✅ |
+| 任务列表展示 | ✅ |
+| 方向键导航选择 | ✅ |
+| Tab / Enter 完成任务 | ✅ |
+| F2 编辑任务 | ✅ |
+| 取消完成（Undo） | ✅ |
+| 分页加载更多 | ✅ |
+| SQLite 持久化 | ✅ |
+| 多语言支持（8种） | ✅ |
+| 设置界面 | ✅ |
+
+### 操作说明
+
+#### 快捷键
+
+| 快捷键 | 功能 |
+| --- | --- |
+| `Shift + Space` | 全局唤起 KeepFlow |
+| `Shift + Enter` | 直接关闭面板 |
+| `Enter`（输入模式） | 保存新任务 |
+| `Enter`（选择模式） | 完成选中任务 |
+| `Tab` | 完成选中任务 |
+| `F2` | 编辑选中任务 |
+| `↑` / `↓` | 导航选择任务 |
+| `Esc` | 取消编辑 / 关闭面板 |
+| 输入框右侧 `↩` 按钮 | 清空输入框 |
+
+#### 交互模式
+
+**输入模式（默认）**
+- 浮层打开时，输入框自动获得焦点
+- 输入内容后按 `Enter` 保存新任务并关闭
+- 按 `Esc` 直接关闭面板
+
+**选择模式**
+- 按 `↓` 从输入模式切换到选择模式
+- `↑` / `↓` 导航选择任务
+- `Tab` 或 `Enter` 完成选中任务
+- `F2` 将选中任务加载到输入框进行编辑
+- 按 `Esc` 取消编辑或关闭面板
+- 点击任务行直接选中
+
+#### 编辑任务流程
+1. 按 `↓` 进入选择模式
+2. `↑` / `↓` 选择要编辑的任务
+3. 按 `F2`，任务内容加载到输入框
+4. 修改文本
+5. 按 `Enter` 保存修改并关闭，或按 `Esc` 取消编辑
 
 ### 技术栈
 
@@ -136,23 +172,57 @@ Typical flow:
 
 ### Features
 
-- Global shortcut to open a launcher-style floating panel
-- Menu bar app with no Dock icon
-- Save input with `Enter`
-- Close with `Esc` or `Shift + Enter`
-- Task list display, selection, and completion
-- Paginated loading for more tasks
-- SQLite persistence with GRDB
-- Built-in localization
-  - Simplified Chinese
-  - English
-  - Japanese
-  - Korean
-  - French
-  - German
-  - Italian
-  - Traditional Chinese
-- Language can be selected in Settings, default is Follow System
+| Feature | Status |
+| --- | --- |
+| Global shortcut (Shift + Space) | ✅ |
+| Menu bar app, no Dock icon | ✅ |
+| Save input (Enter) | ✅ |
+| Close panel (Esc / Shift + Enter) | ✅ |
+| Task list display | ✅ |
+| Arrow key navigation | ✅ |
+| Tab / Enter to complete | ✅ |
+| F2 to edit task | ✅ |
+| Undo complete | ✅ |
+| Paginated loading | ✅ |
+| SQLite persistence | ✅ |
+| Multi-language (8 languages) | ✅ |
+| Settings interface | ✅ |
+
+### Keyboard Shortcuts
+
+| Shortcut | Action |
+| --- | --- |
+| `Shift + Space` | Open KeepFlow globally |
+| `Shift + Enter` | Close panel directly |
+| `Enter` (input mode) | Save new task |
+| `Enter` (selection mode) | Complete selected task |
+| `Tab` | Complete selected task |
+| `F2` | Edit selected task |
+| `↑` / `↓` | Navigate task list |
+| `Esc` | Cancel edit / Close panel |
+| `↩` button in input field | Clear input |
+
+### Interaction Modes
+
+**Input Mode (default)**
+- Input field auto-focuses when panel opens
+- Type and press `Enter` to save new task and close
+- Press `Esc` to close panel directly
+
+**Selection Mode**
+- Press `↓` to switch from input mode to selection mode
+- `↑` / `↓` to navigate tasks
+- `Tab` or `Enter` to complete selected task
+- `F2` to load selected task into input field for editing
+- Press `Esc` to cancel edit or close panel
+- Click on a task row to select
+
+### Edit Task Flow
+1. Press `↓` to enter selection mode
+2. Use `↑` / `↓` to select the task to edit
+3. Press `F2`, task content loads into input field
+4. Modify the text
+5. Press `Enter` to save and close, or `Esc` to cancel edit
 
 ### Stack
 
