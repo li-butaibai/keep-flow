@@ -15,12 +15,12 @@ enum Constants {
     }
 
     enum Layout {
-        static let flowListLimit: Int = 10
-        static let flowListPageSize: Int = 5
+        static let flashMindListLimit: Int = 10
+        static let flashMindListPageSize: Int = 5
         static let inputFieldHeight: CGFloat = 44
         static let contentPadding: CGFloat = 12
         static let contentSpacing: CGFloat = 10
-        static let flowListMaxHeight: CGFloat = 440
+        static let flashMindListMaxHeight: CGFloat = 440
         static let panelMaxHeight: CGFloat = 580
     }
 

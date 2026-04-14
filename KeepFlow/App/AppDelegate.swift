@@ -113,7 +113,7 @@ class SettingsWindow: NSWindow {
 
 class SettingsViewController: NSViewController {
 
-    private var flowLimitField: NSTextField!
+    private var flashMindLimitField: NSTextField!
     private var shortcutRecordView: ShortcutRecordView!
     private var languagePopupButton: NSPopUpButton!
 
@@ -127,15 +127,15 @@ class SettingsViewController: NSViewController {
     }
 
     private func setupUI() {
-        // Flow limit setting
-        let flowLimitLabel = NSTextField(labelWithString: L10n.tr("settings.flow_limit"))
-        flowLimitLabel.frame = NSRect(x: 20, y: 190, width: 160, height: 24)
-        view.addSubview(flowLimitLabel)
+        // FlashMind limit setting
+        let flashMindLimitLabel = NSTextField(labelWithString: L10n.tr("settings.flashmind_limit"))
+        flashMindLimitLabel.frame = NSRect(x: 20, y: 190, width: 160, height: 24)
+        view.addSubview(flashMindLimitLabel)
 
-        flowLimitField = NSTextField(frame: NSRect(x: 190, y: 190, width: 60, height: 24))
-        flowLimitField.stringValue = "\(AppSettings.shared.flowListLimit)"
-        flowLimitField.alignment = .center
-        view.addSubview(flowLimitField)
+        flashMindLimitField = NSTextField(frame: NSRect(x: 190, y: 190, width: 60, height: 24))
+        flashMindLimitField.stringValue = "\(AppSettings.shared.flashMindListLimit)"
+        flashMindLimitField.alignment = .center
+        view.addSubview(flashMindLimitField)
 
         // Shortcut setting
         let shortcutLabel = NSTextField(labelWithString: L10n.tr("settings.shortcut"))
@@ -166,8 +166,8 @@ class SettingsViewController: NSViewController {
     }
 
     @objc private func saveSettings() {
-        if let limit = Int(flowLimitField.stringValue), limit > 0 && limit <= 20 {
-            AppSettings.shared.flowListLimit = limit
+        if let limit = Int(flashMindLimitField.stringValue), limit > 0 && limit <= 20 {
+            AppSettings.shared.flashMindListLimit = limit
         }
 
         AppSettings.shared.shortcutKeyCode = shortcutRecordView.keyCode
@@ -260,20 +260,20 @@ class ShortcutRecordView: NSView {
 class AppSettings {
     static let shared = AppSettings()
 
-    private let flowLimitKey = "com.keepflow.flowListLimit"
+    private let flashMindLimitKey = "com.keepflow.flashMindListLimit"
     private let shortcutKeyCodeKey = "com.keepflow.shortcutKeyCode"
     private let shortcutModifiersKey = "com.keepflow.shortcutModifiers"
     private let appLanguageKey = "com.keepflow.appLanguage"
 
     private init() {}
 
-    var flowListLimit: Int {
+    var flashMindListLimit: Int {
         get {
-            let value = UserDefaults.standard.integer(forKey: flowLimitKey)
-            return value > 0 ? value : Constants.Layout.flowListLimit
+            let value = UserDefaults.standard.integer(forKey: flashMindLimitKey)
+            return value > 0 ? value : Constants.Layout.flashMindListLimit
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: flowLimitKey)
+            UserDefaults.standard.set(newValue, forKey: flashMindLimitKey)
         }
     }
 

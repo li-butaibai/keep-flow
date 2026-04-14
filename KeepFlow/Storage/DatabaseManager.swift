@@ -52,8 +52,8 @@ final class DatabaseManager {
 
         var migrator = DatabaseMigrator()
 
-        migrator.registerMigration("v1_create_flows") { db in
-            try db.create(table: "flows", ifNotExists: true) { t in
+        migrator.registerMigration("v1_create_flashminds") { db in
+            try db.create(table: "flashminds", ifNotExists: true) { t in
                 t.column("id", .text).primaryKey()
                 t.column("content", .text).notNull()
                 t.column("status", .text).notNull()
@@ -64,28 +64,42 @@ final class DatabaseManager {
             }
         }
 
+        migrator.registerMigration("v2_migrate_flows_to_flashminds") { db in
+            // Check if old "flows" table exists and has data
+            let tableExists = try db.tableExists("flows")
+            if tableExists {
+                // Copy all data from flows to flashminds
+                try db.execute(sql: """
+                    INSERT OR IGNORE INTO flashminds (id, content, status, createdAt, completedAt, deletedAt, flowType)
+                    SELECT id, content, status, createdAt, completedAt, deletedAt, flowType FROM flows
+                """)
+                // Drop the old table
+                try db.drop(table: "flows")
+            }
+        }
+
         try migrator.migrate(dbQueue)
     }
 
     private func retryFallbackQueue() throws {
         guard let dbQueue = dbQueue else { return }
 
-        let failedFlows = fallbackQueue.drain()
-        for flow in failedFlows {
+        let failedFlashMinds = fallbackQueue.drain()
+        for flashMind in failedFlashMinds {
             do {
                 try dbQueue.write { db in
-                    try flow.save(db)
+                    try flashMind.save(db)
                 }
             } catch {
                 // Still failing, add back to queue for next retry
-                fallbackQueue.enqueue(flow)
-                print("Failed to retry flow \(flow.id): \(error)")
+                fallbackQueue.enqueue(flashMind)
+                print("Failed to retry flashMind \(flashMind.id): \(error)")
             }
         }
     }
 
-    func addToFallbackQueue(_ flow: Flow) {
-        fallbackQueue.enqueue(flow)
+    func addToFallbackQueue(_ flashMind: FlashMind) {
+        fallbackQueue.enqueue(flashMind)
     }
 
     func fallbackQueueCount() -> Int {
@@ -96,23 +110,23 @@ final class DatabaseManager {
 // MARK: - In-Memory Fallback Queue
 
 final class InMemoryFallbackQueue {
-    private var queue: [Flow] = []
-    private let queueKey = "com.keepflow.failed_flows"
+    private var queue: [FlashMind] = []
+    private let queueKey = "com.keepflow.failed_flashminds"
 
     init() {
         loadFromDisk()
     }
 
-    func enqueue(_ flow: Flow) {
-        queue.append(flow)
+    func enqueue(_ flashMind: FlashMind) {
+        queue.append(flashMind)
         saveToDisk()
     }
 
-    func drain() -> [Flow] {
-        let flows = queue
+    func drain() -> [FlashMind] {
+        let flashMinds = queue
         queue.removeAll()
         saveToDisk()
-        return flows
+        return flashMinds
     }
 
     var count: Int {
@@ -126,9 +140,9 @@ final class InMemoryFallbackQueue {
 
     private func loadFromDisk() {
         guard let data = UserDefaults.standard.data(forKey: queueKey),
-              let flows = try? JSONDecoder().decode([Flow].self, from: data) else {
+              let flashMinds = try? JSONDecoder().decode([FlashMind].self, from: data) else {
             return
         }
-        queue = flows
+        queue = flashMinds
     }
 }

@@ -1,18 +1,18 @@
 import SwiftUI
 
-struct FlowListView: View {
+struct FlashMindListView: View {
     @ObservedObject var viewModel: MainViewModel
     @ObservedObject private var localization = LocalizationManager.shared
 
     var body: some View {
         ScrollView {
             VStack(spacing: 0) {
-                ForEach(Array(viewModel.flows.enumerated()), id: \.element.id) { index, flow in
-                    FlowRow(
-                        flow: flow,
+                ForEach(Array(viewModel.flashMinds.enumerated()), id: \.element.id) { index, flashMind in
+                    FlashMindRow(
+                        flashMind: flashMind,
                         isSelected: viewModel.interactionMode == .selection && index == viewModel.selectedIndex,
                         onStatusTap: {
-                            viewModel.completeFlow(at: index)
+                            viewModel.completeFlashMind(at: index)
                         }
                     )
                         .onTapGesture {
@@ -20,17 +20,17 @@ struct FlowListView: View {
                             viewModel.interactionMode = .selection
                         }
 
-                    if index < viewModel.flows.count - 1 {
+                    if index < viewModel.flashMinds.count - 1 {
                         Divider()
                             .background(Color.gray.opacity(0.12))
                     }
                 }
 
-                if viewModel.hasMoreFlows {
+                if viewModel.hasMoreFlashMinds {
                     Button(action: {
-                        viewModel.loadMoreFlows()
+                        viewModel.loadMoreFlashMinds()
                     }) {
-                        Text(localization.localized("flows.load_more"))
+                        Text(localization.localized("flashminds.load_more"))
                             .font(.system(size: 12, weight: .medium))
                             .foregroundColor(.secondary)
                             .frame(maxWidth: .infinity)

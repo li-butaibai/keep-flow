@@ -1,15 +1,15 @@
 import Foundation
 import GRDB
 
-enum FlowStatus: String, Codable, DatabaseValueConvertible {
+enum FlashMindStatus: String, Codable, DatabaseValueConvertible {
     case todo
     case done
 }
 
-struct Flow: Identifiable, Codable, Equatable {
+struct FlashMind: Identifiable, Codable, Equatable {
     let id: UUID
     var content: String
-    var status: FlowStatus
+    var status: FlashMindStatus
     var createdAt: Date
     var completedAt: Date?
     var deletedAt: Date?
@@ -18,7 +18,7 @@ struct Flow: Identifiable, Codable, Equatable {
     init(
         id: UUID = UUID(),
         content: String,
-        status: FlowStatus = .todo,
+        status: FlashMindStatus = .todo,
         createdAt: Date = Date(),
         completedAt: Date? = nil,
         deletedAt: Date? = nil,
@@ -36,8 +36,8 @@ struct Flow: Identifiable, Codable, Equatable {
 
 // MARK: - GRDB Conformance
 
-extension Flow: FetchableRecord, PersistableRecord {
-    static let databaseTableName = "flows"
+extension FlashMind: FetchableRecord, PersistableRecord {
+    static let databaseTableName = "flashminds"
 
     enum Columns: String, ColumnExpression {
         case id, content, status, createdAt, completedAt, deletedAt, flowType

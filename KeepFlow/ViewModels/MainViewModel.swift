@@ -3,62 +3,62 @@ import Combine
 
 class MainViewModel: ObservableObject {
     @Published var inputText: String = ""
-    @Published var flows: [Flow] = []
+    @Published var flashMinds: [FlashMind] = []
     @Published var selectedIndex: Int = 0
     @Published var shouldResetFocus: Bool = false
-    @Published var visibleFlowLimit: Int = AppSettings.shared.flowListLimit
-    @Published var totalVisibleFlowCount: Int = 0
+    @Published var visibleFlashMindLimit: Int = AppSettings.shared.flashMindListLimit
+    @Published var totalVisibleFlashMindCount: Int = 0
 
     enum InteractionMode {
         case input
         case selection
     }
     @Published var interactionMode: InteractionMode = .input
-    @Published var editingFlowId: UUID? = nil
+    @Published var editingFlashMindId: UUID? = nil
 
     init() {
-        fetchFlows()
+        fetchFlashMinds()
     }
 
     func submit() {
-        if editingFlowId != nil {
-            saveEditedFlow()
+        if editingFlashMindId != nil {
+            saveEditedFlashMind()
             return
         }
         let content = inputText.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !content.isEmpty else { return }
 
-        let result = FlowManager.shared.addFlow(content: content)
+        let result = FlashMindManager.shared.addFlashMind(content: content)
         switch result {
         case .success:
             inputText = ""
-            fetchFlows()
+            fetchFlashMinds()
         case .failure(let error):
-            print("Failed to add flow: \(error)")
+            print("Failed to add flashMind: \(error)")
         }
     }
 
-    func completeFlow(at index: Int) {
-        guard index >= 0 && index < flows.count else { return }
-        let flow = flows[index]
+    func completeFlashMind(at index: Int) {
+        guard index >= 0 && index < flashMinds.count else { return }
+        let flashMind = flashMinds[index]
 
         do {
-            try FlowManager.shared.completeFlow(id: flow.id)
-            fetchFlows()
+            try FlashMindManager.shared.completeFlashMind(id: flashMind.id)
+            fetchFlashMinds()
         } catch {
-            print("Failed to complete flow: \(error)")
+            print("Failed to complete flashMind: \(error)")
         }
     }
 
-    func fetchFlows() {
-        totalVisibleFlowCount = FlowManager.shared.visibleFlowCount()
-        flows = FlowManager.shared.fetchFlows(limit: visibleFlowLimit)
+    func fetchFlashMinds() {
+        totalVisibleFlashMindCount = FlashMindManager.shared.visibleFlashMindCount()
+        flashMinds = FlashMindManager.shared.fetchFlashMinds(limit: visibleFlashMindLimit)
 
-        if flows.isEmpty {
+        if flashMinds.isEmpty {
             interactionMode = .input
             selectedIndex = 0
         } else {
-            selectedIndex = min(selectedIndex, flows.count - 1)
+            selectedIndex = min(selectedIndex, flashMinds.count - 1)
         }
 
         DispatchQueue.main.async {
@@ -68,67 +68,67 @@ class MainViewModel: ObservableObject {
         }
     }
 
-    func resetFlowPagination() {
-        visibleFlowLimit = AppSettings.shared.flowListLimit
+    func resetFlashMindPagination() {
+        visibleFlashMindLimit = AppSettings.shared.flashMindListLimit
     }
 
-    func loadMoreFlows() {
-        guard hasMoreFlows else { return }
-        visibleFlowLimit += Constants.Layout.flowListPageSize
-        fetchFlows()
+    func loadMoreFlashMinds() {
+        guard hasMoreFlashMinds else { return }
+        visibleFlashMindLimit += Constants.Layout.flashMindListPageSize
+        fetchFlashMinds()
     }
 
-    var hasMoreFlows: Bool {
-        flows.count < totalVisibleFlowCount
+    var hasMoreFlashMinds: Bool {
+        flashMinds.count < totalVisibleFlashMindCount
     }
 
     func selectNext() {
-        guard !flows.isEmpty else { return }
+        guard !flashMinds.isEmpty else { return }
         if interactionMode == .input {
             interactionMode = .selection
             selectedIndex = 0
         } else {
-            selectedIndex = min(selectedIndex + 1, flows.count - 1)
+            selectedIndex = min(selectedIndex + 1, flashMinds.count - 1)
         }
     }
 
     func selectPrevious() {
-        guard !flows.isEmpty else { return }
+        guard !flashMinds.isEmpty else { return }
         selectedIndex = max(selectedIndex - 1, 0)
     }
 
     func confirmSelection() {
-        guard interactionMode == .selection && selectedIndex < flows.count else { return }
-        completeFlow(at: selectedIndex)
+        guard interactionMode == .selection && selectedIndex < flashMinds.count else { return }
+        completeFlashMind(at: selectedIndex)
     }
 
-    func loadFlowForEditing() {
-        guard interactionMode == .selection && selectedIndex < flows.count else { return }
-        let flow = flows[selectedIndex]
-        editingFlowId = flow.id
-        inputText = flow.content
+    func loadFlashMindForEditing() {
+        guard interactionMode == .selection && selectedIndex < flashMinds.count else { return }
+        let flashMind = flashMinds[selectedIndex]
+        editingFlashMindId = flashMind.id
+        inputText = flashMind.content
         interactionMode = .input
         shouldResetFocus = true
     }
 
     func cancelEditing() {
-        editingFlowId = nil
+        editingFlashMindId = nil
         inputText = ""
     }
 
-    func saveEditedFlow() {
-        guard let editingId = editingFlowId else { return }
+    func saveEditedFlashMind() {
+        guard let editingId = editingFlashMindId else { return }
         let content = inputText.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !content.isEmpty else { return }
 
         do {
-            try FlowManager.shared.updateFlow(id: editingId, content: content)
-            editingFlowId = nil
+            try FlashMindManager.shared.updateFlashMind(id: editingId, content: content)
+            editingFlashMindId = nil
             inputText = ""
-            fetchFlows()
+            fetchFlashMinds()
             WindowManager.shared.close()
         } catch {
-            print("Failed to update flow: \(error)")
+            print("Failed to update flashMind: \(error)")
         }
     }
 }

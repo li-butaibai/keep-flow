@@ -1,13 +1,13 @@
 "app.name" = "KeepFlow";
 "app.slogan" = "Keep your flow, capture your thoughts";
 "input.placeholder" = "Capturez vos idées, puis appuyez sur Entrée pour enregistrer...";
-"flows.load_more" = "Voir plus";
+"flashminds.load_more" = "Voir plus";
 "date.yesterday" = "Hier";
 "menu.open_keepflow" = "Ouvrir KeepFlow";
 "menu.settings" = "Réglages...";
 "menu.quit" = "Quitter";
 "settings.title" = "Réglages KeepFlow";
-"settings.flow_limit" = "Nombre de flux affichés par défaut :";
+"settings.flashmind_limit" = "Nombre de瞬念 affichés par défaut :";
 "settings.shortcut" = "Raccourci d'activation :";
 "settings.language" = "Langue :";
 "settings.press_shortcut" = "Appuyez sur le raccourci...";

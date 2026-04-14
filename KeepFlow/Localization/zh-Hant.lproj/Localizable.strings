@@ -1,13 +1,13 @@
 "app.name" = "KeepFlow";
 "app.slogan" = "Keep your flow, capture your thoughts";
 "input.placeholder" = "捕捉靈感，按 Enter 儲存...";
-"flows.load_more" = "更多";
+"flashminds.load_more" = "更多";
 "date.yesterday" = "昨天";
 "menu.open_keepflow" = "打開 KeepFlow";
 "menu.settings" = "設定...";
 "menu.quit" = "結束";
 "settings.title" = "KeepFlow 設定";
-"settings.flow_limit" = "預設顯示條目數量:";
+"settings.flashmind_limit" = "預設顯示條目數量:";
 "settings.shortcut" = "喚醒快捷鍵:";
 "settings.language" = "語言:";
 "settings.press_shortcut" = "按下快捷鍵...";

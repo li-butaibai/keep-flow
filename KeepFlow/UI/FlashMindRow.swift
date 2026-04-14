@@ -1,7 +1,7 @@
 import SwiftUI
 
-struct FlowRow: View {
-    let flow: Flow
+struct FlashMindRow: View {
+    let flashMind: FlashMind
     var isSelected: Bool = false
     var onStatusTap: (() -> Void)? = nil
 
@@ -15,9 +15,9 @@ struct FlowRow: View {
             }) {
                 ZStack {
                     Circle()
-                        .fill(flow.status == .done ? Color.clear : Color.gray.opacity(0.2))
+                        .fill(flashMind.status == .done ? Color.clear : Color.gray.opacity(0.2))
                         .frame(width: 14, height: 14)
-                    if flow.status == .done {
+                    if flashMind.status == .done {
                         Circle()
                             .fill(Color.green.opacity(0.8))
                             .frame(width: 14, height: 14)
@@ -31,10 +31,10 @@ struct FlowRow: View {
             .buttonStyle(.plain)
 
             // Content
-            Text(flow.content)
+            Text(flashMind.content)
                 .font(.system(size: 13))
-                .foregroundColor(flow.status == .done ? .gray : .black)
-                .strikethrough(flow.status == .done)
+                .foregroundColor(flashMind.status == .done ? .gray : .black)
+                .strikethrough(flashMind.status == .done)
                 .lineLimit(2)
                 .multilineTextAlignment(.leading)
 
@@ -71,14 +71,14 @@ struct FlowRow: View {
         let formatter = DateFormatter()
         let calendar = Calendar.current
 
-        if calendar.isDateInToday(flow.createdAt) {
+        if calendar.isDateInToday(flashMind.createdAt) {
             formatter.dateFormat = "HH:mm"
-        } else if calendar.isDateInYesterday(flow.createdAt) {
+        } else if calendar.isDateInYesterday(flashMind.createdAt) {
             return localization.localized("date.yesterday")
         } else {
             formatter.dateFormat = "MM/dd"
         }
 
-        return formatter.string(from: flow.createdAt)
+        return formatter.string(from: flashMind.createdAt)
     }
 }

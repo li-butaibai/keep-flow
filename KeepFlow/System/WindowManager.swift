@@ -100,9 +100,9 @@ class WindowManager {
         mainViewModel?.inputText = ""
         mainViewModel?.interactionMode = .input
         mainViewModel?.selectedIndex = 0
-        mainViewModel?.editingFlowId = nil
-        mainViewModel?.resetFlowPagination()
-        mainViewModel?.fetchFlows()
+        mainViewModel?.editingFlashMindId = nil
+        mainViewModel?.resetFlashMindPagination()
+        mainViewModel?.fetchFlashMinds()
         mainViewModel?.shouldResetFocus = true
 
         // Resize panel based on content
@@ -229,7 +229,7 @@ class WindowManager {
         }
 
         if keyCode == 120, mainViewModel?.interactionMode == .selection { // F2
-            mainViewModel?.loadFlowForEditing()
+            mainViewModel?.loadFlashMindForEditing()
             return true
         }
 
@@ -245,7 +245,7 @@ class KeepFlowPanel: NSPanel {
 
     override func cancelOperation(_ sender: Any?) {
         // ESC key - if editing, cancel edit; otherwise close
-        if WindowManager.shared.mainViewModel?.editingFlowId != nil {
+        if WindowManager.shared.mainViewModel?.editingFlashMindId != nil {
             WindowManager.shared.mainViewModel?.cancelEditing()
         } else {
             WindowManager.shared.close()

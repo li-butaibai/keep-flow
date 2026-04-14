@@ -14,7 +14,7 @@ struct MainView: View {
                 InputView(viewModel: viewModel)
                     .frame(height: Constants.Layout.inputFieldHeight)
 
-                if viewModel.flows.count > 0 {
+                if viewModel.flashMinds.count > 0 {
                     Divider()
                         .background(Color.gray.opacity(0.35))
 
@@ -28,8 +28,8 @@ struct MainView: View {
                     }
                 }
 
-                flowListContainer
-                    .frame(maxHeight: Constants.Layout.flowListMaxHeight)
+                flashMindListContainer
+                    .frame(maxHeight: Constants.Layout.flashMindListMaxHeight)
             }
             .padding(Constants.Layout.contentPadding)
         }
@@ -38,9 +38,9 @@ struct MainView: View {
     }
 
     @ViewBuilder
-    private var flowListContainer: some View {
-        if viewModel.flows.count > 0 {
-            FlowListView(viewModel: viewModel)
+    private var flashMindListContainer: some View {
+        if viewModel.flashMinds.count > 0 {
+            FlashMindListView(viewModel: viewModel)
         } else {
             EmptyView()
         }

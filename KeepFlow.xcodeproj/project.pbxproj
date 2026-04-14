@@ -8,19 +8,19 @@
 
 /* Begin PBXBuildFile section */
 		010108F103A73764E17A0C91 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5033170B3A3B350CA02B70F /* MainViewModel.swift */; };
+		08C723D2869D8571E9E32277 /* FlashMindManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D93A0B3FF1FFD1437FA723C1 /* FlashMindManager.swift */; };
+		11E56D750BDB3A43BBCA0BFF /* FlashMindRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DBD4673119D4BAD3DF6BB6 /* FlashMindRepository.swift */; };
 		1803DE6958BFCF3C094607B0 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E64D9BA5558DB3ACCF08773 /* main.swift */; };
-		195C049DDC507AA37E5CE669 /* FlowRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0806BE81F13FF1B5C1A80AFA /* FlowRow.swift */; };
+		1C366219742C588C24CDFC7C /* FlashMindListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D82006E9985D60FF1F3E8E1 /* FlashMindListView.swift */; };
 		1DA5AE18CD5487B04782AB59 /* Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960EEAC2A83148DA603CDF3F /* Localization.swift */; };
-		2B156269CED4CDA0566959E3 /* FlowManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A02F33ECEE8293B70E53B89 /* FlowManager.swift */; };
+		2FAC440C0708C22AA24C1784 /* FlashMindRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7963BFF827C20C44535E8A82 /* FlashMindRow.swift */; };
 		39B19B71AE9467688E0E884F /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F73143B157D423E1D74B59C /* DatabaseManager.swift */; };
 		3B00713DD5E13E2224FD13DD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0825ADF7B79910151B89769F /* AppDelegate.swift */; };
 		4BC08E075386A5F2887FE9E0 /* WindowManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145B6AF77521FB5ADCA67AC6 /* WindowManager.swift */; };
 		56D5F4F9A6C6B8D79F33EAFB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5C4B6DBA45F532958429D2D1 /* Localizable.strings */; };
-		580A6DAC7713E0B603CFF356 /* Flow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42483D3C4E86632EC22D403 /* Flow.swift */; };
 		6A5AEA51AF122895405E1638 /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99CE702A9703E3B8FC9F296A /* InputView.swift */; };
-		6C2C27F318613DDD065B2B27 /* FlowRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EEA0DAEC07D6398D0874906 /* FlowRepository.swift */; };
-		6C72FBF48DCAEC58EFAFBA26 /* FlowListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B64B5C162B172EC8C46FEEE /* FlowListView.swift */; };
 		880E74D75285D0BDE2C34CAE /* MenuBarIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = A093D1096A1B76C4581B5C4A /* MenuBarIcon.swift */; };
+		A345E9315984EA45B92119D3 /* FlashMind.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2B492DE1695571A8185D20 /* FlashMind.swift */; };
 		A57AA00C87826C4793A67784 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB475C19CBC0A3AC071405F /* MainView.swift */; };
 		BEB484959AF687B0558D7EE1 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C0AD7257CDC987767B5602B /* Constants.swift */; };
 		EDBF90836EC196FF41CDC126 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D296A4EC0795A87D79DF6F6E /* Assets.xcassets */; };
@@ -29,22 +29,21 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0806BE81F13FF1B5C1A80AFA /* FlowRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowRow.swift; sourceTree = "<group>"; };
 		0825ADF7B79910151B89769F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		145B6AF77521FB5ADCA67AC6 /* WindowManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowManager.swift; sourceTree = "<group>"; };
 		14812F104C2492D2140F6A58 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		14DBD4673119D4BAD3DF6BB6 /* FlashMindRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashMindRepository.swift; sourceTree = "<group>"; };
 		17F014B2BF270E0B34259A14 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
-		1A02F33ECEE8293B70E53B89 /* FlowManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowManager.swift; sourceTree = "<group>"; };
 		1E64D9BA5558DB3ACCF08773 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		23F046AF2630BB5528B7E85A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		2B64B5C162B172EC8C46FEEE /* FlowListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowListView.swift; sourceTree = "<group>"; };
-		2EEA0DAEC07D6398D0874906 /* FlowRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowRepository.swift; sourceTree = "<group>"; };
 		3B2182BB85537FEC7CB8ED44 /* KeepFlow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KeepFlow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		44C00FD0A13296FE1BF6CBDA /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		5DB475C19CBC0A3AC071405F /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		602D8CCFA403AAB232613C22 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		6C0AD7257CDC987767B5602B /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		78384148B1C19707EB20AB07 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
+		7963BFF827C20C44535E8A82 /* FlashMindRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashMindRow.swift; sourceTree = "<group>"; };
+		8D82006E9985D60FF1F3E8E1 /* FlashMindListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashMindListView.swift; sourceTree = "<group>"; };
 		8F73143B157D423E1D74B59C /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		960EEAC2A83148DA603CDF3F /* Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localization.swift; sourceTree = "<group>"; };
 		99CE702A9703E3B8FC9F296A /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
@@ -53,10 +52,11 @@
 		D296A4EC0795A87D79DF6F6E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D5033170B3A3B350CA02B70F /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		D83E717DD61C8CF0D8B7924F /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		D93A0B3FF1FFD1437FA723C1 /* FlashMindManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashMindManager.swift; sourceTree = "<group>"; };
 		E0977144907D2D14C2C61526 /* ShortcutManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutManager.swift; sourceTree = "<group>"; };
 		E236EBA614646707F00A9215 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E251D35B0E25597EFD0DFBBB /* KeepFlow.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = KeepFlow.entitlements; sourceTree = "<group>"; };
-		E42483D3C4E86632EC22D403 /* Flow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flow.swift; sourceTree = "<group>"; };
+		FB2B492DE1695571A8185D20 /* FlashMind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashMind.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,7 +82,7 @@
 		0E4DE1520D0F05A11AD4B177 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				E42483D3C4E86632EC22D403 /* Flow.swift */,
+				FB2B492DE1695571A8185D20 /* FlashMind.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -90,7 +90,7 @@
 		1362564E31FECFFCF7E84552 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				1A02F33ECEE8293B70E53B89 /* FlowManager.swift */,
+				D93A0B3FF1FFD1437FA723C1 /* FlashMindManager.swift */,
 				E0977144907D2D14C2C61526 /* ShortcutManager.swift */,
 			);
 			path = Services;
@@ -108,8 +108,8 @@
 		5AE7371A6E5C4006FCD4552C /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				2B64B5C162B172EC8C46FEEE /* FlowListView.swift */,
-				0806BE81F13FF1B5C1A80AFA /* FlowRow.swift */,
+				8D82006E9985D60FF1F3E8E1 /* FlashMindListView.swift */,
+				7963BFF827C20C44535E8A82 /* FlashMindRow.swift */,
 				99CE702A9703E3B8FC9F296A /* InputView.swift */,
 				5DB475C19CBC0A3AC071405F /* MainView.swift */,
 			);
@@ -161,7 +161,7 @@
 			isa = PBXGroup;
 			children = (
 				8F73143B157D423E1D74B59C /* DatabaseManager.swift */,
-				2EEA0DAEC07D6398D0874906 /* FlowRepository.swift */,
+				14DBD4673119D4BAD3DF6BB6 /* FlashMindRepository.swift */,
 				0E4DE1520D0F05A11AD4B177 /* Models */,
 			);
 			path = Storage;
@@ -280,11 +280,11 @@
 				3B00713DD5E13E2224FD13DD /* AppDelegate.swift in Sources */,
 				BEB484959AF687B0558D7EE1 /* Constants.swift in Sources */,
 				39B19B71AE9467688E0E884F /* DatabaseManager.swift in Sources */,
-				580A6DAC7713E0B603CFF356 /* Flow.swift in Sources */,
-				6C72FBF48DCAEC58EFAFBA26 /* FlowListView.swift in Sources */,
-				2B156269CED4CDA0566959E3 /* FlowManager.swift in Sources */,
-				6C2C27F318613DDD065B2B27 /* FlowRepository.swift in Sources */,
-				195C049DDC507AA37E5CE669 /* FlowRow.swift in Sources */,
+				A345E9315984EA45B92119D3 /* FlashMind.swift in Sources */,
+				1C366219742C588C24CDFC7C /* FlashMindListView.swift in Sources */,
+				08C723D2869D8571E9E32277 /* FlashMindManager.swift in Sources */,
+				11E56D750BDB3A43BBCA0BFF /* FlashMindRepository.swift in Sources */,
+				2FAC440C0708C22AA24C1784 /* FlashMindRow.swift in Sources */,
 				6A5AEA51AF122895405E1638 /* InputView.swift in Sources */,
 				1DA5AE18CD5487B04782AB59 /* Localization.swift in Sources */,
 				A57AA00C87826C4793A67784 /* MainView.swift in Sources */,

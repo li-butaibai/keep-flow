@@ -1,58 +1,58 @@
 import Foundation
 import GRDB
 
-protocol FlowRepository {
-    func save(_ flow: Flow) throws
-    func findById(_ id: UUID) throws -> Flow?
-    func findAll(limit: Int) throws -> [Flow]
+protocol FlashMindRepository {
+    func save(_ flashMind: FlashMind) throws
+    func findById(_ id: UUID) throws -> FlashMind?
+    func findAll(limit: Int) throws -> [FlashMind]
     func countAll() throws -> Int
-    func findTodoFlows(limit: Int) throws -> [Flow]
+    func findTodoFlashMinds(limit: Int) throws -> [FlashMind]
     func delete(_ id: UUID) throws
     func softDelete(_ id: UUID) throws
-    func countByStatus(_ status: FlowStatus) throws -> Int
+    func countByStatus(_ status: FlashMindStatus) throws -> Int
 }
 
-final class FlowRepositoryImpl: FlowRepository {
+final class FlashMindRepositoryImpl: FlashMindRepository {
     private var dbQueue: DatabaseQueue? {
         return DatabaseManager.shared.database
     }
 
-    func save(_ flow: Flow) throws {
+    func save(_ flashMind: FlashMind) throws {
         guard let dbQueue = dbQueue else {
             // Fallback to in-memory queue if database unavailable
-            DatabaseManager.shared.addToFallbackQueue(flow)
+            DatabaseManager.shared.addToFallbackQueue(flashMind)
             return
         }
 
         do {
             try dbQueue.write { db in
-                try flow.save(db)
+                try flashMind.save(db)
             }
         } catch {
             // On failure, add to fallback queue for retry later
-            DatabaseManager.shared.addToFallbackQueue(flow)
+            DatabaseManager.shared.addToFallbackQueue(flashMind)
             throw error
         }
     }
 
-    func findById(_ id: UUID) throws -> Flow? {
+    func findById(_ id: UUID) throws -> FlashMind? {
         guard let dbQueue = dbQueue else { return nil }
 
         return try dbQueue.read { db in
-            try Flow.fetchOne(db, key: id)
+            try FlashMind.fetchOne(db, key: id)
         }
     }
 
-    func findAll(limit: Int) throws -> [Flow] {
+    func findAll(limit: Int) throws -> [FlashMind] {
         guard let dbQueue = dbQueue else { return [] }
 
         return try dbQueue.read { db in
-            try Flow
-                .filter(Flow.Columns.deletedAt == nil)
+            try FlashMind
+                .filter(FlashMind.Columns.deletedAt == nil)
                 .order(
                     // Keep incomplete tasks first, then completed ones
                     SQL("CASE WHEN status = 'todo' THEN 0 ELSE 1 END"),
-                    Flow.Columns.createdAt.desc
+                    FlashMind.Columns.createdAt.desc
                 )
                 .limit(limit)
                 .fetchAll(db)
@@ -63,20 +63,20 @@ final class FlowRepositoryImpl: FlowRepository {
         guard let dbQueue = dbQueue else { return 0 }
 
         return try dbQueue.read { db in
-            try Flow
-                .filter(Flow.Columns.deletedAt == nil)
+            try FlashMind
+                .filter(FlashMind.Columns.deletedAt == nil)
                 .fetchCount(db)
         }
     }
 
-    func findTodoFlows(limit: Int) throws -> [Flow] {
+    func findTodoFlashMinds(limit: Int) throws -> [FlashMind] {
         guard let dbQueue = dbQueue else { return [] }
 
         return try dbQueue.read { db in
-            try Flow
-                .filter(Flow.Columns.status == FlowStatus.todo.rawValue)
-                .filter(Flow.Columns.deletedAt == nil)
-                .order(Flow.Columns.createdAt.desc)
+            try FlashMind
+                .filter(FlashMind.Columns.status == FlashMindStatus.todo.rawValue)
+                .filter(FlashMind.Columns.deletedAt == nil)
+                .order(FlashMind.Columns.createdAt.desc)
                 .limit(limit)
                 .fetchAll(db)
         }
@@ -86,7 +86,7 @@ final class FlowRepositoryImpl: FlowRepository {
         guard let dbQueue = dbQueue else { return }
 
         try dbQueue.write { db in
-            _ = try Flow.deleteOne(db, key: id)
+            _ = try FlashMind.deleteOne(db, key: id)
         }
     }
 
@@ -94,20 +94,20 @@ final class FlowRepositoryImpl: FlowRepository {
         guard let dbQueue = dbQueue else { return }
 
         try dbQueue.write { db in
-            if var flow = try Flow.fetchOne(db, key: id) {
-                flow.deletedAt = Date()
-                try flow.save(db)
+            if var flashMind = try FlashMind.fetchOne(db, key: id) {
+                flashMind.deletedAt = Date()
+                try flashMind.save(db)
             }
         }
     }
 
-    func countByStatus(_ status: FlowStatus) throws -> Int {
+    func countByStatus(_ status: FlashMindStatus) throws -> Int {
         guard let dbQueue = dbQueue else { return 0 }
 
         return try dbQueue.read { db in
-            try Flow
-                .filter(Flow.Columns.status == status.rawValue)
-                .filter(Flow.Columns.deletedAt == nil)
+            try FlashMind
+                .filter(FlashMind.Columns.status == status.rawValue)
+                .filter(FlashMind.Columns.deletedAt == nil)
                 .fetchCount(db)
         }
     }
